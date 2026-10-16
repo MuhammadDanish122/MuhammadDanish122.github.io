@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case study: Kafka CDC Platform · Muhammad Danish Ishfaq</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet"><link rel="stylesheet" href="site.css"></head><body class="csp">
+<nav><a class="logo" href="index.html">Danish Ishfaq</a><div><a href="index.html#work">Work</a><a href="index.html#contact">Contact</a></div></nav>
+<header class="cs-hero"><a class="back" href="index.html">← Home</a><p class="eyebrow">Case study</p><h1>Kafka CDC Platform</h1>
+<p class="lead">How I replicate 200+ MySQL tables into ClickHouse in real time without losing a row. Debezium, a 3-node KRaft Kafka cluster, Python consumers, and a control plane I built to run it.</p>
+<dl class="facts"><div><dt>Role</dt><dd>Architect and lead engineer</dd></div><div><dt>Scale</dt><dd>200+ tables · 220+ consumers · peaks 28k+ rows/min</dd></div><div><dt>Environments</dt><dd>Dev, staging, prod</dd></div><div><dt>Stack</dt><dd>MySQL · Debezium · Kafka · Python · ClickHouse</dd></div></dl></header>
+<div class="cs-wrap"><aside class="toc"><p>On this page</p><a href="#overview">Overview</a><a href="#manager">Kafka Manager</a><a href="#context">Context</a><a href="#architecture">Architecture</a><a href="#ha">High availability and failover</a><a href="#delivery">Delivery guarantee</a><a href="#promotion">Deployment and promotion</a><a href="#observability">Observability</a><a href="#decisions">Design decisions and trade-offs</a><a href="#failures">Failure modes</a><a href="#results">Results</a><a href="#clickhouse">ClickHouse warehouse</a><a href="#warehousing">Earlier warehouses</a></aside><main>
+<section class="cs" id="overview"><h2>Overview</h2><p>This is the system I'm proudest of. It moves every change from a busy MySQL system into ClickHouse within seconds, and it's built so a failure stops the pipeline instead of skipping data.</p></section>
+<section class="cs" id="manager"><h2>Kafka Manager, the control plane</h2>
+<p class="lead">This is the control room I built for our real-time CDC pipeline. It's a FastAPI backend with a plain JS front end, and the team uses it every day to run the pipeline, debug it and check its health across dev, staging and production.</p>
+<div class="gallery"><figure class="wide"><a href="assets/screens/km_mysql_stats_overview.png"><img src="assets/screens/km_mysql_stats_overview.png" alt="DML stats: window totals, rows/min, weekday baseline and the stacked activity chart." loading="lazy"></a><figcaption>DML stats: window totals, rows/min, weekday baseline and the stacked activity chart.</figcaption></figure><figure class=""><a href="assets/screens/km_cluster.png"><img src="assets/screens/km_cluster.png" alt="Cluster view: node health, KRaft quorum (3 voters, survives one loss), Connect and Schema Registry." loading="lazy"></a><figcaption>Cluster view: node health, KRaft quorum (3 voters, survives one loss), Connect and Schema Registry.</figcaption></figure><figure class=""><a href="assets/screens/km_consumers.png"><img src="assets/screens/km_consumers.png" alt="Consumers: one worker per table, with bulk start, stop and restart." loading="lazy"></a><figcaption>Consumers: one worker per table, with bulk start, stop and restart.</figcaption></figure><figure class=""><a href="assets/screens/km_health.png"><img src="assets/screens/km_health.png" alt="Consumer health: lag, group state and sync phase for 222 consumers at a glance." loading="lazy"></a><figcaption>Consumer health: lag, group state and sync phase for 222 consumers at a glance.</figcaption></figure><figure class=""><a href="assets/screens/km_consumer_detail.png"><img src="assets/screens/km_consumer_detail.png" alt="Consumer detail: auto-restart, offsets, failure log and live progress." loading="lazy"></a><figcaption>Consumer detail: auto-restart, offsets, failure log and live progress.</figcaption></figure><figure class=""><a href="assets/screens/km_reconcile.png"><img src="assets/screens/km_reconcile.png" alt="Reconcile: daily source-vs-ClickHouse check per table." loading="lazy"></a><figcaption>Reconcile: daily source-vs-ClickHouse check per table.</figcaption></figure><figure class=""><a href="assets/screens/km_jobs.png"><img src="assets/screens/km_jobs.png" alt="Dedup jobs: scheduled lightweight-delete runs with history." loading="lazy"></a><figcaption>Dedup jobs: scheduled lightweight-delete runs with history.</figcaption></figure><figure class=""><a href="assets/screens/km_backups.png"><img src="assets/screens/km_backups.png" alt="Backups: one-off and scheduled ClickHouse backups with retention presets." loading="lazy"></a><figcaption>Backups: one-off and scheduled ClickHouse backups with retention presets.</figcaption></figure></div>
+<ul class="feat cols">
+<li><b>Consumers</b>Start, stop and recycle, with live status. Recycling goes in batches with hold times so we never restart everything at once.</li>
+<li><b>Trace</b>Scans every partition of a topic for a key or record id.</li>
+<li><b>Backups</b>Topic backups with retention presets.</li>
+<li><b>Dedup</b>Jobs use ClickHouse lightweight deletes instead of mutations.</li>
+<li><b>Stats</b>Per-minute insert/update/delete rollups per table from my own binlog reader, plus lag, binlog headroom, baseline vs now, the hottest table and top 5/10/20 charts.</li>
+<li><b>Safe by default</b>Bulk dedup and backfill are off by default and never switch themselves on.</li></ul></section><section class="cs" id="context"><h2>Context</h2>
+<p>The analytics team needed live data from a busy transactional MySQL system: customer, CRM and transactional tables, more than 200 of them. Querying MySQL directly wasn't an option, and the older replication had a worse problem. Records went missing and nobody could say why. I was asked to redesign it so analytics could trust the numbers, across Local/dev, staging and production.</p>
+
+<div class="grid3 req">
+<div class="card"><h3>Throughput</h3><p>Around 11k changed rows a minute sustained, peaks above 28k. About 80% updates and 20% inserts, over 200+ tables.</p></div>
+<div class="card"><h3>Zero loss</h3><p>No skipped events, ever. If something is wrong, the pipeline stops loudly and doesn't move on.</p></div>
+<div class="card"><h3>High availability</h3><p>Lose a broker, a Connect worker or a consumer and replication keeps going. Restarts can't take everything down at once.</p></div></div>
+
+</section><section class="cs" id="architecture"><h2>Architecture</h2>
+<p>Debezium reads the MySQL binlog and runs as connectors on a Kafka Connect cluster. Events go as Avro into a 3-node Kafka cluster in KRaft mode. Python consumers, one per table or table group, write them into versioned ClickHouse tables. Next to the data path, a binlog reader of my own builds exact per-minute DML stats. Kafka Manager is the control plane over all of it, and Nagios watches it.</p>
+<figure class="card"><img src="assets/architecture.svg" alt="End-to-end CDC architecture"></figure>
+
+</section><section class="cs" id="ha"><h2>High availability and failover</h2>
+<p>KRaft takes ZooKeeper out of the picture. All three nodes run as controller and broker, so the quorum survives losing one. Topics are replicated across nodes and producers only count a write once the in-sync replicas have it, so a failed leader hands over to a follower that's up to date. Connect runs distributed: if a worker dies, its Debezium tasks rebalance to the others and resume from the stored binlog position. Consumers fail over through their group and pick up from the last committed offset. Because of how commits work (below), that's always a batch ClickHouse already confirmed.</p>
+<figure class="card"><img src="assets/ha-failover.svg" alt="HA and failover diagram"></figure>
+
+</section><section class="cs" id="delivery"><h2>Delivery guarantee</h2>
+<p>This is the part that fixed the missing records. A consumer polls a batch, writes it to ClickHouse, waits for the confirmation, and only then commits the offset. If the write fails, the consumer stops with the offset untouched. Empty batches never get committed as success, and new groups start from earliest. On restart a batch may be written twice. The versioned tables are built to absorb that, so duplicates are harmless and gaps can't happen.</p>
+<figure class="card"><img src="assets/delivery-sequence.svg" alt="Delivery sequence diagram"></figure>
+
+</section><section class="cs" id="promotion"><h2>Deployment and promotion</h2>
+<p>Every release is a Git tag. The same tag goes Local → staging → prod. Before prod there's a mandatory dry run against production and a manual sign-off. Runtime flags that differ per environment live on the hosts and are excluded from deploys, so a release can't flip a prod setting by accident.</p>
+<figure class="card"><img src="assets/promotion.svg" alt="Release promotion diagram"></figure>
+
+</section><section class="cs" id="observability"><h2>Observability</h2>
+<div class="grid3">
+<div class="card"><h3>Lag</h3><p>Consumer lag per group, visible in Kafka Manager and alerted in Nagios.</p></div>
+<div class="card"><h3>Binlog headroom</h3><p>How much binlog is left before MySQL purges it. This is the window we have to recover a stopped connector.</p></div>
+<div class="card"><h3>Per-table DML</h3><p>Exact insert/update/delete counts per table per minute, read from the binlog in order with checkpoints. Baseline vs now, hottest table, top 5/10/20.</p></div></div>
+
+</section><section class="cs" id="decisions"><h2>Design decisions and trade-offs</h2>
+<div class="table"><table><tr><th>Decision</th><th>Why</th><th>Trade-off I accepted</th></tr>
+<tr><td>Commit only after ClickHouse confirms</td><td>Closes the commit-before-ack gap</td><td>Possible re-writes after a crash, absorbed by versioned tables</td></tr>
+<tr><td>Failed batch stops the consumer</td><td>Bad data or outages surface right away</td><td>That table pauses until someone looks. Lag alerts cover it.</td></tr>
+<tr><td>New groups start from earliest</td><td>A reset can never skip history</td><td>Slower first catch-up</td></tr>
+<tr><td>ReplacingMergeTree-style versioned tables</td><td>Fits an update-heavy (~80%) stream and makes replays safe</td><td>Latest version is resolved at merge/query time</td></tr>
+<tr><td>Dedup with lightweight deletes</td><td>Much lighter than mutations on a live warehouse</td><td>Runs as a separate, opt-in job</td></tr>
+<tr><td>DML stats from the binlog, not sampling</td><td>Exact and resumable numbers</td><td>One more reader process to run</td></tr>
+<tr><td>Batch-wise recycling with hold times</td><td>Never restart all consumers at once</td><td>Rolling restarts take longer</td></tr>
+<tr><td>Bounded id-gap audit (~20k-id buckets)</td><td>Safe to run on production MySQL</td><td>A full audit takes time, by design</td></tr>
+<tr><td>Risky toggles off by default</td><td>Bulk dedup or backfill never start by themselves</td><td>Someone has to turn them on deliberately</td></tr></table></div>
+
+</section><section class="cs" id="failures"><h2>Failure modes</h2>
+<div class="table"><table><tr><th>What breaks</th><th>What happens</th></tr>
+<tr><td>Kafka broker down</td><td>KRaft quorum holds with two nodes, partition leadership moves to in-sync replicas</td></tr>
+<tr><td>Connect worker down</td><td>Debezium tasks rebalance to other workers and resume from the stored binlog position</td></tr>
+<tr><td>Consumer crashes</td><td>Group rebalances; work resumes from the last ClickHouse-confirmed offset</td></tr>
+<tr><td>ClickHouse write fails</td><td>Consumer stops, offset isn't committed, Nagios alerts</td></tr>
+<tr><td>New column in MySQL</td><td>Added to ClickHouse automatically, ingestion keeps running</td></tr>
+<tr><td>Connector stalled</td><td>Binlog headroom shows how long we have before data would age out</td></tr>
+<tr><td>Suspected missing rows</td><td>The id-gap audit finds the exact ids and which consumer owns them</td></tr></table></div>
+
+</section><section class="cs" id="results"><h2>Results</h2><div class="card result"><h3>Results</h3><ul>
+<li>Found and fixed the root causes of historical missing records: commit-before-ack, latest-offset resets and empty-batch commits.</li>
+<li>Post-fix audit across 217 tables: no missing ids in almost every table. The few gaps left trace back to specific consumers, not random loss.</li>
+<li>200+ tables and 220+ consumers replicating in real time at ~11k rows/min, peaks above 28k.</li>
+<li>Per-table load visible in real time, so triage starts with facts.</li>
+<li>HA Kafka with failover, and repeatable, gated deploys across three environments.</li></ul></div></section><section class="cs" id="clickhouse"><h2>ClickHouse data warehouse</h2>
+<p>ClickHouse is where all this lands and where people query it. Kafka topics come in layers: raw CDC events from Debezium, processed analytics topics where Python consumers normalize, validate and enrich, and BI streaming topics for dashboards. Records also go out through APIs, webhooks, SFTP/FTP and Kafka sinks where a downstream system needs them.</p>
+<figure class="card"><img src="assets/clickhouse-layers.svg" alt="ClickHouse layers diagram"></figure>
+<div class="grid3">
+<div class="card"><h3>Versioned tables</h3><p>ReplacingMergeTree-style. Every change is an insert with a version, and the latest per key wins. That suits an update-heavy stream and makes replays safe.</p></div>
+<div class="card"><h3>Dedup and drift</h3><p>Dedup jobs use lightweight deletes, not mutations. New source columns are added automatically while ingestion keeps running.</p></div>
+<div class="card"><h3>What it serves</h3><p>Real-time operational reporting and customer activity analytics, straight off live data.</p></div></div></section><section class="cs" id="warehousing"><h2>Data warehousing and data marts</h2>
+<p>I've built warehouses on most of the major stacks. Here's the short version.</p>
+<figure class="card"><img src="assets/warehousing.svg" alt="Warehouses and marts overview"></figure>
+<div class="grid2">
+<div class="card"><h3>Pipedrive · Azure + dbt/Iceberg</h3><p>ETL from MongoDB, PostgreSQL and MySQL into Azure Blob, transforms in Databricks orchestrated by ADF, Bronze/Silver/Gold on Azure SQL DW, and Gold dims and facts for KPI dashboards. Then I led the move off legacy PySpark to dbt on Apache Iceberg (S3/Athena, Airflow) with staging/prep/mart layers. Queries got 40% faster.</p></div>
+<div class="card"><h3>Signal · Microsoft Fabric</h3><p>Moved off Databricks, Azure SQL DW and ADF. Fabric Spark notebooks and pipelines, Lakehouse on Delta/OneLake, Silver/Gold into Fabric Warehouse, and a semantic layer for Power BI.</p></div>
+<div class="card"><h3>Teradata + Hive</h3><p>Warehouse loads with BTEQ, FastLoad and TPT, monitoring in Viewpoint, Informatica automated with shell scripts.</p></div>
+<div class="card"><h3>Sensor data marts</h3><p>NiFi ingestion, PySpark and Airflow into Redshift and Hive marts, shipped through CI/CD to Kubernetes.</p></div>
+<div class="card"><h3>Sitara Textile EDW</h3><p>SQL Server enterprise warehouse, SSIS loads from Oracle, Power BI on top.</p></div></div></section>
+<section class="cs end"><p>Want to talk about something similar? <a href="mailto:daneshrana45@gmail.com">daneshrana45@gmail.com</a></p></section>
+</main></div><footer>© <span id="y"></span> Muhammad Danish Ishfaq</footer>
+<script src="site.js"></script></body></html>

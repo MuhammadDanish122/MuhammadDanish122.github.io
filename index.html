@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Muhammad Danish Ishfaq · Data Architect</title><meta name="description" content="Data Architect and Principal Data Engineer. Real-time CDC with Kafka, Debezium and ClickHouse.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet"><link rel="stylesheet" href="site.css"></head><body>
+<nav><a class="logo" href="#">Danish Ishfaq</a><div><a href="#work">Work</a><a href="#experience">Experience</a><a href="case-study.html">Case study</a><a href="#contact">Contact</a></div></nav>
+
+<header class="hero reveal"><p class="eyebrow">Muhammad Danish Ishfaq</p>
+<h1>Data Architect &amp;<br>Principal Data Engineer</h1>
+<p class="lead">I design real-time data platforms that move data out of busy production systems and into analytics without losing a row.</p>
+<div class="cta"><a class="btn" href="#work">View work</a><a class="btn ghost" href="#contact">Contact</a></div>
+<div class="counters">
+<div><b data-n="9" data-pre="~">~9</b><span>years building data systems</span></div>
+<div><b data-n="200" data-suf="+">200+</b><span>tables replicated in real time</span></div>
+<div><b data-n="28" data-suf="k+">28k+</b><span>rows per minute at peak</span></div>
+<div><b>0</b><span>events skipped. Zero-loss CDC.</span></div></div>
+<div class="logos"><span>Worked with</span><i>TKxel</i><i>Pipedrive</i><i>Teradata</i><i>Sulzer</i><i>Zong</i><i>Systems Ltd</i></div></header>
+
+<section id="flagship" class="reveal"><p class="eyebrow">Flagship</p><h2>Kafka CDC Platform</h2>
+<p class="sub">MySQL → Debezium → 3-node KRaft Kafka → Python consumers → ClickHouse, with a control plane I built.</p>
+<figure class="diagram"><img src="assets/architecture.svg" alt="CDC platform architecture"></figure>
+<ul class="highlights">
+<li><b>Zero event skipping.</b> Offsets are committed only after ClickHouse confirms the write.</li>
+<li><b>HA end to end.</b> KRaft quorum, Connect worker rebalancing, failover across 220+ consumers.</li>
+<li><b>Fixed historical data loss.</b> I found three root causes. The audit now shows no missing ids in almost every table.</li>
+<li><b>Kafka Manager.</b> Consumer control, record tracing, backups, dedup and live DML stats in one UI.</li></ul>
+<figure class="shot-hero"><img src="assets/screens/km_mysql_stats_overview.png" alt="Kafka Manager: live MySQL DML stats"><figcaption>Kafka Manager, live view. Per-minute inserts, updates and deletes read straight from the binlog.</figcaption></figure>
+<a class="more" href="case-study.html">Read the full case study →</a></section>
+
+<section id="work" class="reveal"><p class="eyebrow">Selected work</p><h2>Other things I've built</h2><div class="cards">
+<div class="c"><h3>Signal → Microsoft Fabric</h3><p>Led the move off Databricks, Azure SQL DW and ADF to a Fabric Lakehouse and Warehouse.</p><em>Fabric · Spark · Power BI</em></div>
+<div class="c"><h3>Pipedrive dbt + Iceberg</h3><p>Replaced legacy PySpark with dbt on Iceberg. Queries got 40% faster.</p><em>dbt · Iceberg · Airflow</em></div>
+<div class="c"><h3>Emirates Digital Banking</h3><p>Real-time banking streaming platform on Kafka and Kafka Streams.</p><em>Kafka · Scala · Kubernetes</em></div>
+<div class="c"><h3>Teradata warehouse</h3><p>Warehouse loads and automation on Teradata and Hive.</p><em>Teradata · BTEQ · Hive</em></div>
+<div class="c"><h3>Sensor data marts</h3><p>NiFi, PySpark and Airflow into Redshift and Hive marts.</p><em>NiFi · Spark · Redshift</em></div>
+<div class="c"><h3>IoT pipelines on AWS</h3><p>IoT Core to S3 and IoT Analytics, queried in Athena.</p><em>AWS IoT · S3 · Athena</em></div></div></section>
+
+<section id="experience" class="reveal"><p class="eyebrow">Experience</p><h2>Nearly 9 years, Pakistan and Europe</h2><ol class="tl">
+<li><span>2025 – now</span><b>Principal Data Engineer</b><i>TKxel</i></li>
+<li><span>2024 – 2025</span><b>Senior Data Engineer</b><i>Pipedrive · Estonia</i></li>
+<li><span>2023 – 2024</span><b>Senior Data Engineer</b><i>Teradata</i></li>
+<li><span>2023</span><b>Senior Data Engineer</b><i>Sulzer Pumps · Finland</i></li>
+<li><span>2020 – 2022</span><b>Data Engineer</b><i>Zong CMPak · Systems Limited</i></li>
+<li><span>2019 – 2020</span><b>Big Data Engineer</b><i>HiveWorx</i></li>
+<li><span>2018 – 2019</span><b>ETL/BI and app developer</b><i>SSA Soft · Techcreatix</i></li></ol></section>
+
+<section id="skills" class="reveal"><p class="eyebrow">Toolbox</p><h2>What I work with</h2><div class="groups">
+<div><h4>Streaming</h4><p><span><img src="https://cdn.simpleicons.org/apachekafka/9aa4b8" alt="" loading="lazy">Kafka</span><span>Debezium</span><span><img src="https://cdn.simpleicons.org/apachespark/9aa4b8" alt="" loading="lazy">Spark Streaming</span><span><img src="https://cdn.simpleicons.org/apachenifi/9aa4b8" alt="" loading="lazy">NiFi</span></p></div>
+<div><h4>Warehouses</h4><p><span><img src="https://cdn.simpleicons.org/clickhouse/9aa4b8" alt="" loading="lazy">ClickHouse</span><span><img src="https://cdn.simpleicons.org/teradata/9aa4b8" alt="" loading="lazy">Teradata</span><span>Redshift</span><span>SQL Server</span><span>Hive</span></p></div>
+<div><h4>Platforms</h4><p><span>Microsoft Fabric</span><span><img src="https://cdn.simpleicons.org/databricks/9aa4b8" alt="" loading="lazy">Databricks</span><span><img src="https://cdn.simpleicons.org/dbt/9aa4b8" alt="" loading="lazy">dbt</span><span>Iceberg</span><span>Azure</span><span>AWS</span></p></div>
+<div><h4>Code and ops</h4><p><span><img src="https://cdn.simpleicons.org/python/9aa4b8" alt="" loading="lazy">Python</span><span><img src="https://cdn.simpleicons.org/scala/9aa4b8" alt="" loading="lazy">Scala</span><span>SQL</span><span><img src="https://cdn.simpleicons.org/apacheairflow/9aa4b8" alt="" loading="lazy">Airflow</span><span><img src="https://cdn.simpleicons.org/fastapi/9aa4b8" alt="" loading="lazy">FastAPI</span><span><img src="https://cdn.simpleicons.org/linux/9aa4b8" alt="" loading="lazy">Linux</span></p></div></div>
+<p class="edu"><b>MS Computer Science</b>, University of Eastern Finland (2022–24) · <b>BS CS</b>, UMT Lahore (2013–17) · Teradata Vantage Associate · 8 IBM data certificates</p></section>
+
+<section id="contact" class="contact reveal"><h2>Let's build something reliable.</h2><p class="sub">CDC pipelines, Kafka, warehouse migrations, real-time analytics.</p>
+<div class="cta"><a class="btn" href="mailto:daneshrana45@gmail.com">daneshrana45@gmail.com</a><a class="btn ghost" href="https://www.linkedin.com/in/danish-rajput/">LinkedIn</a><a class="btn ghost" href="https://github.com/MuhammadDanish122">GitHub</a></div></section>
+<footer>© <span id="y"></span> Muhammad Danish Ishfaq</footer>
+<script src="site.js"></script></body></html>

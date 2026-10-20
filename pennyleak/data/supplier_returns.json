@@ -1,0 +1,32 @@
+[
+  {
+    "supplier": "Harbor Textile Partners",
+    "returns": 67,
+    "refunds": 7414.25
+  },
+  {
+    "supplier": "Northline Supply Co",
+    "returns": 51,
+    "refunds": 7174.87
+  },
+  {
+    "supplier": "Cedar Grove Mills",
+    "returns": 52,
+    "refunds": 6105.81
+  },
+  {
+    "supplier": "Pacific Rim Goods",
+    "returns": 52,
+    "refunds": 4412.48
+  },
+  {
+    "supplier": "Alpine Components Ltd",
+    "returns": 55,
+    "refunds": 4351.08
+  },
+  {
+    "supplier": "Andes Leather Works",
+    "returns": 52,
+    "refunds": 3390.47
+  }
+]

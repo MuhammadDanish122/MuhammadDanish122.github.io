@@ -1,0 +1,27 @@
+[
+  {
+    "reason": "late_delivery",
+    "returns": 67,
+    "refunds": 7385.75
+  },
+  {
+    "reason": "size",
+    "returns": 72,
+    "refunds": 6951.58
+  },
+  {
+    "reason": "changed_mind",
+    "returns": 70,
+    "refunds": 6587.52
+  },
+  {
+    "reason": "damaged",
+    "returns": 60,
+    "refunds": 6445.85
+  },
+  {
+    "reason": "wrong_item",
+    "returns": 60,
+    "refunds": 5478.26
+  }
+]

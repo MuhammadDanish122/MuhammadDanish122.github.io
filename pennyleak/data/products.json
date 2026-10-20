@@ -1,0 +1,866 @@
+[
+  {
+    "sku": "DEMO-BEA-HAI-01",
+    "name": "Argan Repair Mask",
+    "category": "Beauty",
+    "units": 108,
+    "revenue": 24475.84,
+    "margin_dollars": 16309.96,
+    "margin_pct": 66.6
+  },
+  {
+    "sku": "DEMO-HOM-LIN-02",
+    "name": "Percale Sheet Set",
+    "category": "Home",
+    "units": 86,
+    "revenue": 20279.55,
+    "margin_dollars": 13161.33,
+    "margin_pct": 64.9
+  },
+  {
+    "sku": "DEMO-HOM-COO-04",
+    "name": "Nonstick Fry Pan",
+    "category": "Home",
+    "units": 86,
+    "revenue": 19339.76,
+    "margin_dollars": 12608.54,
+    "margin_pct": 65.2
+  },
+  {
+    "sku": "DEMO-BEA-SKI-05",
+    "name": "Retinol Night Oil",
+    "category": "Beauty",
+    "units": 90,
+    "revenue": 19245.42,
+    "margin_dollars": 12436.02,
+    "margin_pct": 64.6
+  },
+  {
+    "sku": "DEMO-FOO-BOO-03",
+    "name": "Lug-Sole Hiker",
+    "category": "Footwear",
+    "units": 92,
+    "revenue": 18255.0,
+    "margin_dollars": 11548.2,
+    "margin_pct": 63.3
+  },
+  {
+    "sku": "DEMO-HOM-CAN-02",
+    "name": "Fig Leaf Candle",
+    "category": "Home",
+    "units": 98,
+    "revenue": 19336.67,
+    "margin_dollars": 11025.29,
+    "margin_pct": 57.0
+  },
+  {
+    "sku": "DEMO-APP-TEE-03",
+    "name": "Linen Blend V-Neck",
+    "category": "Apparel",
+    "units": 104,
+    "revenue": 17258.45,
+    "margin_dollars": 10528.61,
+    "margin_pct": 61.0
+  },
+  {
+    "sku": "DEMO-BEA-FRA-04",
+    "name": "Velvet Iris EDP",
+    "category": "Beauty",
+    "units": 80,
+    "revenue": 17231.25,
+    "margin_dollars": 10460.85,
+    "margin_pct": 60.7
+  },
+  {
+    "sku": "DEMO-APP-JAC-02",
+    "name": "Quilted Liner Jacket",
+    "category": "Apparel",
+    "units": 93,
+    "revenue": 16856.43,
+    "margin_dollars": 9941.88,
+    "margin_pct": 59.0
+  },
+  {
+    "sku": "DEMO-FOO-BOO-01",
+    "name": "Chelsea Leather Boot",
+    "category": "Footwear",
+    "units": 76,
+    "revenue": 16193.37,
+    "margin_dollars": 9794.93,
+    "margin_pct": 60.5
+  },
+  {
+    "sku": "DEMO-ELE-CHA-02",
+    "name": "MagSnap Power Bank",
+    "category": "Electronics",
+    "units": 85,
+    "revenue": 16459.07,
+    "margin_dollars": 9656.52,
+    "margin_pct": 58.7
+  },
+  {
+    "sku": "DEMO-HOM-LIN-01",
+    "name": "Stonewashed Linen Duvet",
+    "category": "Home",
+    "units": 84,
+    "revenue": 16675.13,
+    "margin_dollars": 9560.33,
+    "margin_pct": 57.3
+  },
+  {
+    "sku": "DEMO-ELE-WEA-01",
+    "name": "Pulse Fitness Band",
+    "category": "Electronics",
+    "units": 95,
+    "revenue": 15632.14,
+    "margin_dollars": 9538.84,
+    "margin_pct": 61.0
+  },
+  {
+    "sku": "DEMO-FOO-SLI-03",
+    "name": "Pool Day Slide",
+    "category": "Footwear",
+    "units": 97,
+    "revenue": 17029.59,
+    "margin_dollars": 9422.85,
+    "margin_pct": 55.3
+  },
+  {
+    "sku": "DEMO-APP-JEA-03",
+    "name": "High-Rise Wide Leg",
+    "category": "Apparel",
+    "units": 86,
+    "revenue": 15517.48,
+    "margin_dollars": 9217.12,
+    "margin_pct": 59.4
+  },
+  {
+    "sku": "DEMO-APP-JEA-01",
+    "name": "Indigo Slim Denim",
+    "category": "Apparel",
+    "units": 105,
+    "revenue": 17581.95,
+    "margin_dollars": 9002.4,
+    "margin_pct": 51.2
+  },
+  {
+    "sku": "DEMO-APP-JEA-04",
+    "name": "Black Tapered Denim",
+    "category": "Apparel",
+    "units": 76,
+    "revenue": 14131.61,
+    "margin_dollars": 8800.21,
+    "margin_pct": 62.3
+  },
+  {
+    "sku": "DEMO-APP-JAC-01",
+    "name": "Waxed Field Jacket",
+    "category": "Apparel",
+    "units": 81,
+    "revenue": 14524.74,
+    "margin_dollars": 8704.08,
+    "margin_pct": 59.9
+  },
+  {
+    "sku": "DEMO-APP-HOO-05",
+    "name": "Merino Half-Zip",
+    "category": "Apparel",
+    "units": 73,
+    "revenue": 13364.72,
+    "margin_dollars": 8251.07,
+    "margin_pct": 61.7
+  },
+  {
+    "sku": "DEMO-BEA-SKI-02",
+    "name": "Vitamin C Serum",
+    "category": "Beauty",
+    "units": 89,
+    "revenue": 14179.13,
+    "margin_dollars": 8131.58,
+    "margin_pct": 57.3
+  },
+  {
+    "sku": "DEMO-FOO-SLI-06",
+    "name": "Woven Raffia Slide",
+    "category": "Footwear",
+    "units": 79,
+    "revenue": 12188.66,
+    "margin_dollars": 8000.87,
+    "margin_pct": 65.6
+  },
+  {
+    "sku": "DEMO-BEA-SKI-01",
+    "name": "Barrier Repair Cream",
+    "category": "Beauty",
+    "units": 88,
+    "revenue": 13861.87,
+    "margin_dollars": 7991.39,
+    "margin_pct": 57.7
+  },
+  {
+    "sku": "DEMO-HOM-CAN-05",
+    "name": "Black Tea Candle",
+    "category": "Home",
+    "units": 96,
+    "revenue": 14561.22,
+    "margin_dollars": 7938.18,
+    "margin_pct": 54.5
+  },
+  {
+    "sku": "DEMO-APP-JEA-05",
+    "name": "Selvedge Raw Jean",
+    "category": "Apparel",
+    "units": 79,
+    "revenue": 11821.25,
+    "margin_dollars": 7927.34,
+    "margin_pct": 67.1
+  },
+  {
+    "sku": "DEMO-FOO-SLI-02",
+    "name": "Leather Strap Slide",
+    "category": "Footwear",
+    "units": 115,
+    "revenue": 14373.0,
+    "margin_dollars": 7648.95,
+    "margin_pct": 53.2
+  },
+  {
+    "sku": "DEMO-HOM-COO-01",
+    "name": "Cast Iron Skillet 10\"",
+    "category": "Home",
+    "units": 82,
+    "revenue": 10610.11,
+    "margin_dollars": 7089.03,
+    "margin_pct": 66.8
+  },
+  {
+    "sku": "DEMO-APP-HOO-02",
+    "name": "Zip Trail Hoodie",
+    "category": "Apparel",
+    "units": 88,
+    "revenue": 12158.9,
+    "margin_dollars": 7051.38,
+    "margin_pct": 58.0
+  },
+  {
+    "sku": "DEMO-HOM-LIN-04",
+    "name": "Linen Pillowcase Pair",
+    "category": "Home",
+    "units": 82,
+    "revenue": 11641.31,
+    "margin_dollars": 6681.13,
+    "margin_pct": 57.4
+  },
+  {
+    "sku": "DEMO-FOO-SNE-04",
+    "name": "Retro Trainer 86",
+    "category": "Footwear",
+    "units": 76,
+    "revenue": 10935.86,
+    "margin_dollars": 6535.46,
+    "margin_pct": 59.8
+  },
+  {
+    "sku": "DEMO-FOO-SLI-01",
+    "name": "Cloud Foam Slide",
+    "category": "Footwear",
+    "units": 79,
+    "revenue": 12054.78,
+    "margin_dollars": 6091.86,
+    "margin_pct": 50.5
+  },
+  {
+    "sku": "DEMO-BEA-FRA-02",
+    "name": "Citrus Grove Cologne",
+    "category": "Beauty",
+    "units": 73,
+    "revenue": 9587.15,
+    "margin_dollars": 5971.46,
+    "margin_pct": 62.3
+  },
+  {
+    "sku": "DEMO-BEA-FRA-05",
+    "name": "Sandalwood Roll-On",
+    "category": "Beauty",
+    "units": 98,
+    "revenue": 9590.83,
+    "margin_dollars": 5501.29,
+    "margin_pct": 57.4
+  },
+  {
+    "sku": "DEMO-ELE-CHA-04",
+    "name": "Braided USB-C Cable",
+    "category": "Electronics",
+    "units": 94,
+    "revenue": 12031.18,
+    "margin_dollars": 5434.26,
+    "margin_pct": 45.2
+  },
+  {
+    "sku": "DEMO-ELE-CHA-03",
+    "name": "3-in-1 Wireless Dock",
+    "category": "Electronics",
+    "units": 70,
+    "revenue": 8476.11,
+    "margin_dollars": 5368.11,
+    "margin_pct": 63.3
+  },
+  {
+    "sku": "DEMO-FOO-SNE-03",
+    "name": "Canvas High-Top",
+    "category": "Footwear",
+    "units": 94,
+    "revenue": 8003.81,
+    "margin_dollars": 5319.17,
+    "margin_pct": 66.5
+  },
+  {
+    "sku": "DEMO-HOM-COO-02",
+    "name": "Carbon Steel Wok",
+    "category": "Home",
+    "units": 74,
+    "revenue": 10880.71,
+    "margin_dollars": 5298.15,
+    "margin_pct": 48.7
+  },
+  {
+    "sku": "DEMO-BEA-HAI-05",
+    "name": "Bond Rebuild Conditioner",
+    "category": "Beauty",
+    "units": 83,
+    "revenue": 8807.18,
+    "margin_dollars": 5105.38,
+    "margin_pct": 58.0
+  },
+  {
+    "sku": "DEMO-ELE-WEA-04",
+    "name": "Kids GPS Watch",
+    "category": "Electronics",
+    "units": 74,
+    "revenue": 10508.27,
+    "margin_dollars": 5006.37,
+    "margin_pct": 47.6
+  },
+  {
+    "sku": "DEMO-APP-JEA-06",
+    "name": "Stretch Skinny Jean",
+    "category": "Apparel",
+    "units": 95,
+    "revenue": 8432.11,
+    "margin_dollars": 4902.86,
+    "margin_pct": 58.1
+  },
+  {
+    "sku": "DEMO-ELE-AUD-05",
+    "name": "Sport Neckband",
+    "category": "Electronics",
+    "units": 104,
+    "revenue": 12605.85,
+    "margin_dollars": 4890.09,
+    "margin_pct": 38.8
+  },
+  {
+    "sku": "DEMO-ELE-WEA-02",
+    "name": "Halo Smart Watch",
+    "category": "Electronics",
+    "units": 83,
+    "revenue": 11692.61,
+    "margin_dollars": 4738.87,
+    "margin_pct": 40.5
+  },
+  {
+    "sku": "DEMO-ELE-AUD-01",
+    "name": "Pulse ANC Headphones",
+    "category": "Electronics",
+    "units": 94,
+    "revenue": 7798.46,
+    "margin_dollars": 4599.64,
+    "margin_pct": 59.0
+  },
+  {
+    "sku": "DEMO-BEA-HAI-06",
+    "name": "Heat Shield Mist",
+    "category": "Beauty",
+    "units": 82,
+    "revenue": 6696.79,
+    "margin_dollars": 4367.17,
+    "margin_pct": 65.2
+  },
+  {
+    "sku": "DEMO-ELE-AUD-04",
+    "name": "Mini Bluetooth Speaker",
+    "category": "Electronics",
+    "units": 86,
+    "revenue": 6451.91,
+    "margin_dollars": 4247.73,
+    "margin_pct": 65.8
+  },
+  {
+    "sku": "DEMO-FOO-SNE-01",
+    "name": "Court Low Sneaker",
+    "category": "Footwear",
+    "units": 67,
+    "revenue": 7963.38,
+    "margin_dollars": 4147.73,
+    "margin_pct": 52.1
+  },
+  {
+    "sku": "DEMO-FOO-BOO-02",
+    "name": "Desert Suede Boot",
+    "category": "Footwear",
+    "units": 50,
+    "revenue": 6549.7,
+    "margin_dollars": 4005.2,
+    "margin_pct": 61.2
+  },
+  {
+    "sku": "DEMO-BEA-HAI-04",
+    "name": "Curl Define Gel",
+    "category": "Beauty",
+    "units": 78,
+    "revenue": 9055.15,
+    "margin_dollars": 3831.49,
+    "margin_pct": 42.3
+  },
+  {
+    "sku": "DEMO-HOM-COO-03",
+    "name": "Enamel Dutch Oven",
+    "category": "Home",
+    "units": 102,
+    "revenue": 8560.61,
+    "margin_dollars": 3812.51,
+    "margin_pct": 44.5
+  },
+  {
+    "sku": "DEMO-FOO-SLI-05",
+    "name": "Recovery Slide",
+    "category": "Footwear",
+    "units": 79,
+    "revenue": 7855.58,
+    "margin_dollars": 3808.41,
+    "margin_pct": 48.5
+  },
+  {
+    "sku": "DEMO-ELE-CHA-06",
+    "name": "Travel Charging Hub",
+    "category": "Electronics",
+    "units": 74,
+    "revenue": 6798.93,
+    "margin_dollars": 3793.05,
+    "margin_pct": 55.8
+  },
+  {
+    "sku": "DEMO-ELE-AUD-06",
+    "name": "Vinyl Desk Speaker",
+    "category": "Electronics",
+    "units": 87,
+    "revenue": 5884.81,
+    "margin_dollars": 3594.1,
+    "margin_pct": 61.1
+  },
+  {
+    "sku": "DEMO-HOM-COO-05",
+    "name": "Copper Saucepan",
+    "category": "Home",
+    "units": 76,
+    "revenue": 5939.37,
+    "margin_dollars": 3584.89,
+    "margin_pct": 60.4
+  },
+  {
+    "sku": "DEMO-FOO-BOO-06",
+    "name": "Shearling Winter Boot",
+    "category": "Footwear",
+    "units": 74,
+    "revenue": 5348.76,
+    "margin_dollars": 3554.26,
+    "margin_pct": 66.5
+  },
+  {
+    "sku": "DEMO-HOM-COO-06",
+    "name": "Stainless Stock Pot",
+    "category": "Home",
+    "units": 81,
+    "revenue": 7885.07,
+    "margin_dollars": 3438.98,
+    "margin_pct": 43.6
+  },
+  {
+    "sku": "DEMO-HOM-LIN-05",
+    "name": "Cotton Throw Blanket",
+    "category": "Home",
+    "units": 79,
+    "revenue": 5692.88,
+    "margin_dollars": 3437.43,
+    "margin_pct": 60.4
+  },
+  {
+    "sku": "DEMO-APP-TEE-04",
+    "name": "Pima Pocket Tee",
+    "category": "Apparel",
+    "units": 66,
+    "revenue": 8435.09,
+    "margin_dollars": 3372.89,
+    "margin_pct": 40.0
+  },
+  {
+    "sku": "DEMO-BEA-FRA-01",
+    "name": "Oud Noir Eau de Parfum",
+    "category": "Beauty",
+    "units": 96,
+    "revenue": 7251.05,
+    "margin_dollars": 3355.37,
+    "margin_pct": 46.3
+  },
+  {
+    "sku": "DEMO-FOO-SNE-02",
+    "name": "Cloudstep Runner",
+    "category": "Footwear",
+    "units": 103,
+    "revenue": 6997.44,
+    "margin_dollars": 3237.94,
+    "margin_pct": 46.3
+  },
+  {
+    "sku": "DEMO-FOO-SNE-05",
+    "name": "Knit Slip-On",
+    "category": "Footwear",
+    "units": 85,
+    "revenue": 4797.75,
+    "margin_dollars": 2997.45,
+    "margin_pct": 62.5
+  },
+  {
+    "sku": "DEMO-APP-TEE-06",
+    "name": "Ribbed Long-Sleeve Tee",
+    "category": "Apparel",
+    "units": 91,
+    "revenue": 5235.48,
+    "margin_dollars": 2975.04,
+    "margin_pct": 56.8
+  },
+  {
+    "sku": "DEMO-APP-JAC-03",
+    "name": "Denim Trucker Jacket",
+    "category": "Apparel",
+    "units": 78,
+    "revenue": 7811.35,
+    "margin_dollars": 2955.85,
+    "margin_pct": 37.8
+  },
+  {
+    "sku": "DEMO-ELE-WEA-03",
+    "name": "Sleep Ring Tracker",
+    "category": "Electronics",
+    "units": 71,
+    "revenue": 5692.04,
+    "margin_dollars": 2923.04,
+    "margin_pct": 51.4
+  },
+  {
+    "sku": "DEMO-ELE-WEA-05",
+    "name": "Clip Step Counter",
+    "category": "Electronics",
+    "units": 104,
+    "revenue": 5260.02,
+    "margin_dollars": 2904.42,
+    "margin_pct": 55.2
+  },
+  {
+    "sku": "DEMO-APP-HOO-04",
+    "name": "Oversized Studio Hoodie",
+    "category": "Apparel",
+    "units": 74,
+    "revenue": 8068.84,
+    "margin_dollars": 2864.42,
+    "margin_pct": 35.5
+  },
+  {
+    "sku": "DEMO-HOM-CAN-01",
+    "name": "Cedar & Smoke Candle",
+    "category": "Home",
+    "units": 83,
+    "revenue": 6056.84,
+    "margin_dollars": 2840.59,
+    "margin_pct": 46.9
+  },
+  {
+    "sku": "DEMO-APP-HOO-03",
+    "name": "Brushed Loopback Hoodie",
+    "category": "Apparel",
+    "units": 73,
+    "revenue": 4473.91,
+    "margin_dollars": 2651.1,
+    "margin_pct": 59.3
+  },
+  {
+    "sku": "DEMO-FOO-BOO-05",
+    "name": "Zip Ankle Boot",
+    "category": "Footwear",
+    "units": 86,
+    "revenue": 5406.57,
+    "margin_dollars": 2629.63,
+    "margin_pct": 48.6
+  },
+  {
+    "sku": "DEMO-APP-TEE-02",
+    "name": "Heavyweight Boxy Tee",
+    "category": "Apparel",
+    "units": 102,
+    "revenue": 5582.53,
+    "margin_dollars": 2606.17,
+    "margin_pct": 46.7
+  },
+  {
+    "sku": "DEMO-APP-TEE-01",
+    "name": "Everyday Cotton Crew Tee",
+    "category": "Apparel",
+    "units": 76,
+    "revenue": 6834.24,
+    "margin_dollars": 2484.0,
+    "margin_pct": 36.3
+  },
+  {
+    "sku": "DEMO-ELE-WEA-06",
+    "name": "Swim Tracker Band",
+    "category": "Electronics",
+    "units": 63,
+    "revenue": 4999.54,
+    "margin_dollars": 2449.3,
+    "margin_pct": 49.0
+  },
+  {
+    "sku": "DEMO-FOO-SLI-04",
+    "name": "Cork Footbed Slide",
+    "category": "Footwear",
+    "units": 87,
+    "revenue": 4740.9,
+    "margin_dollars": 2270.1,
+    "margin_pct": 47.9
+  },
+  {
+    "sku": "DEMO-HOM-CAN-04",
+    "name": "Amber Vanilla Candle",
+    "category": "Home",
+    "units": 90,
+    "revenue": 3701.39,
+    "margin_dollars": 2221.79,
+    "margin_pct": 60.0
+  },
+  {
+    "sku": "DEMO-ELE-AUD-02",
+    "name": "Air Buds Pro",
+    "category": "Electronics",
+    "units": 97,
+    "revenue": 4650.79,
+    "margin_dollars": 2155.95,
+    "margin_pct": 46.4
+  },
+  {
+    "sku": "DEMO-FOO-SNE-06",
+    "name": "Trail Grip Sneaker",
+    "category": "Footwear",
+    "units": 92,
+    "revenue": 4036.78,
+    "margin_dollars": 2143.42,
+    "margin_pct": 53.1
+  },
+  {
+    "sku": "DEMO-HOM-LIN-06",
+    "name": "Sateen Fitted Sheet",
+    "category": "Home",
+    "units": 104,
+    "revenue": 3795.75,
+    "margin_dollars": 2070.39,
+    "margin_pct": 54.5
+  },
+  {
+    "sku": "DEMO-ELE-CHA-05",
+    "name": "Car Fast Charger",
+    "category": "Electronics",
+    "units": 110,
+    "revenue": 3732.66,
+    "margin_dollars": 2032.06,
+    "margin_pct": 54.4
+  },
+  {
+    "sku": "DEMO-APP-HOO-06",
+    "name": "Garment-Dyed Pullover",
+    "category": "Apparel",
+    "units": 73,
+    "revenue": 4452.27,
+    "margin_dollars": 1955.67,
+    "margin_pct": 43.9
+  },
+  {
+    "sku": "DEMO-BEA-HAI-03",
+    "name": "Silk Leave-In Cream",
+    "category": "Beauty",
+    "units": 84,
+    "revenue": 3017.71,
+    "margin_dollars": 1897.99,
+    "margin_pct": 62.9
+  },
+  {
+    "sku": "DEMO-APP-JAC-04",
+    "name": "Packable Rain Shell",
+    "category": "Apparel",
+    "units": 73,
+    "revenue": 3697.45,
+    "margin_dollars": 1832.3,
+    "margin_pct": 49.6
+  },
+  {
+    "sku": "DEMO-APP-TEE-05",
+    "name": "Washed Graphic Tee",
+    "category": "Apparel",
+    "units": 76,
+    "revenue": 4868.19,
+    "margin_dollars": 1790.95,
+    "margin_pct": 36.8
+  },
+  {
+    "sku": "DEMO-ELE-AUD-03",
+    "name": "Studio Monitor Speaker",
+    "category": "Electronics",
+    "units": 88,
+    "revenue": 2973.64,
+    "margin_dollars": 1788.28,
+    "margin_pct": 60.1
+  },
+  {
+    "sku": "DEMO-BEA-HAI-02",
+    "name": "Scalp Detox Shampoo",
+    "category": "Beauty",
+    "units": 95,
+    "revenue": 3165.78,
+    "margin_dollars": 1778.78,
+    "margin_pct": 56.2
+  },
+  {
+    "sku": "DEMO-BEA-FRA-03",
+    "name": "White Musk Mist",
+    "category": "Beauty",
+    "units": 74,
+    "revenue": 3488.79,
+    "margin_dollars": 1750.53,
+    "margin_pct": 50.2
+  },
+  {
+    "sku": "DEMO-BEA-SKI-06",
+    "name": "Hyaluronic Toner",
+    "category": "Beauty",
+    "units": 86,
+    "revenue": 4422.49,
+    "margin_dollars": 1698.01,
+    "margin_pct": 38.4
+  },
+  {
+    "sku": "DEMO-BEA-SKI-04",
+    "name": "SPF 50 Daily Fluid",
+    "category": "Beauty",
+    "units": 83,
+    "revenue": 2346.2,
+    "margin_dollars": 1557.7,
+    "margin_pct": 66.4
+  },
+  {
+    "sku": "DEMO-APP-JAC-06",
+    "name": "Bomber Flight Jacket",
+    "category": "Apparel",
+    "units": 98,
+    "revenue": 3031.89,
+    "margin_dollars": 1485.45,
+    "margin_pct": 49.0
+  },
+  {
+    "sku": "DEMO-ELE-CHA-01",
+    "name": "65W GaN Wall Charger",
+    "category": "Electronics",
+    "units": 79,
+    "revenue": 3351.32,
+    "margin_dollars": 1415.82,
+    "margin_pct": 42.2
+  },
+  {
+    "sku": "DEMO-HOM-LIN-03",
+    "name": "Waffle Bath Towel",
+    "category": "Home",
+    "units": 90,
+    "revenue": 2111.03,
+    "margin_dollars": 1311.83,
+    "margin_pct": 62.1
+  },
+  {
+    "sku": "DEMO-HOM-CAN-06",
+    "name": "Wild Rose Candle",
+    "category": "Home",
+    "units": 88,
+    "revenue": 2396.32,
+    "margin_dollars": 1262.0,
+    "margin_pct": 52.7
+  },
+  {
+    "sku": "DEMO-APP-JAC-05",
+    "name": "Wool Overshirt",
+    "category": "Apparel",
+    "units": 88,
+    "revenue": 2355.37,
+    "margin_dollars": 1111.05,
+    "margin_pct": 47.2
+  },
+  {
+    "sku": "DEMO-FOO-BOO-04",
+    "name": "Moc-Toe Work Boot",
+    "category": "Footwear",
+    "units": 73,
+    "revenue": 2959.76,
+    "margin_dollars": 1088.04,
+    "margin_pct": 36.8
+  },
+  {
+    "sku": "DEMO-BEA-FRA-06",
+    "name": "Neroli Bloom EDT",
+    "category": "Beauty",
+    "units": 69,
+    "revenue": 2235.09,
+    "margin_dollars": 1040.01,
+    "margin_pct": 46.5
+  },
+  {
+    "sku": "DEMO-APP-JEA-02",
+    "name": "Relaxed Straight Jean",
+    "category": "Apparel",
+    "units": 97,
+    "revenue": 2468.98,
+    "margin_dollars": 1000.4,
+    "margin_pct": 40.5
+  },
+  {
+    "sku": "DEMO-HOM-CAN-03",
+    "name": "Sea Salt Linen Candle",
+    "category": "Home",
+    "units": 79,
+    "revenue": 1899.3,
+    "margin_dollars": 714.3,
+    "margin_pct": 37.6
+  },
+  {
+    "sku": "DEMO-BEA-SKI-03",
+    "name": "Gentle Gel Cleanser",
+    "category": "Beauty",
+    "units": 75,
+    "revenue": 1229.3,
+    "margin_dollars": 626.3,
+    "margin_pct": 50.9
+  },
+  {
+    "sku": "DEMO-APP-HOO-01",
+    "name": "Cloud Fleece Hoodie",
+    "category": "Apparel",
+    "units": 57,
+    "revenue": 1050.03,
+    "margin_dollars": 477.75,
+    "margin_pct": 45.5
+  }
+]

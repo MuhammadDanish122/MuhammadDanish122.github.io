@@ -1,0 +1,62 @@
+[
+  {
+    "supplier_id": 1,
+    "name": "Northline Supply Co",
+    "country": "US",
+    "on_time_rate": 0.92,
+    "revenue": 181915.25,
+    "margin_dollars": 103403.72,
+    "margin_pct": 56.8,
+    "units": 1350
+  },
+  {
+    "supplier_id": 2,
+    "name": "Harbor Textile Partners",
+    "country": "VN",
+    "on_time_rate": 0.88,
+    "revenue": 175218.44,
+    "margin_dollars": 97409.85,
+    "margin_pct": 55.6,
+    "units": 1428
+  },
+  {
+    "supplier_id": 4,
+    "name": "Cedar Grove Mills",
+    "country": "IN",
+    "on_time_rate": 0.81,
+    "revenue": 145275.93,
+    "margin_dollars": 78813.28,
+    "margin_pct": 54.3,
+    "units": 1278
+  },
+  {
+    "supplier_id": 5,
+    "name": "Pacific Rim Goods",
+    "country": "CN",
+    "on_time_rate": 0.86,
+    "revenue": 135904.86,
+    "margin_dollars": 76345.66,
+    "margin_pct": 56.2,
+    "units": 1406
+  },
+  {
+    "supplier_id": 3,
+    "name": "Alpine Components Ltd",
+    "country": "DE",
+    "on_time_rate": 0.95,
+    "revenue": 125798.12,
+    "margin_dollars": 71835.79,
+    "margin_pct": 57.1,
+    "units": 1357
+  },
+  {
+    "supplier_id": 6,
+    "name": "Andes Leather Works",
+    "country": "CO",
+    "on_time_rate": 0.9,
+    "revenue": 87840.74,
+    "margin_dollars": 48730.58,
+    "margin_pct": 55.5,
+    "units": 1336
+  }
+]

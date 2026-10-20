@@ -1,0 +1,79 @@
+[
+  {
+    "channel": "paid_social",
+    "orders": 902,
+    "revenue": 188480.99,
+    "aov": 208.96,
+    "sessions": 39289,
+    "cvr_pct": 2.52,
+    "ad_spend": 52774.68,
+    "roas": 3.57,
+    "contrib_approx": 32041.77
+  },
+  {
+    "channel": "organic_search",
+    "orders": 865,
+    "revenue": 174942.85,
+    "aov": 202.25,
+    "sessions": 35740,
+    "cvr_pct": 2.68,
+    "ad_spend": 0.0,
+    "roas": null,
+    "contrib_approx": 78724.28
+  },
+  {
+    "channel": "paid_search",
+    "orders": 692,
+    "revenue": 150733.58,
+    "aov": 217.82,
+    "sessions": 29250,
+    "cvr_pct": 2.31,
+    "ad_spend": 33161.39,
+    "roas": 4.55,
+    "contrib_approx": 34668.72
+  },
+  {
+    "channel": "email",
+    "orders": 445,
+    "revenue": 96774.6,
+    "aov": 217.47,
+    "sessions": 19810,
+    "cvr_pct": 2.58,
+    "ad_spend": 3870.98,
+    "roas": 25.0,
+    "contrib_approx": 39677.59
+  },
+  {
+    "channel": "direct",
+    "orders": 399,
+    "revenue": 83531.96,
+    "aov": 209.35,
+    "sessions": 16210,
+    "cvr_pct": 2.44,
+    "ad_spend": 0.0,
+    "roas": null,
+    "contrib_approx": 37589.38
+  },
+  {
+    "channel": "affiliate",
+    "orders": 293,
+    "revenue": 59301.81,
+    "aov": 202.4,
+    "sessions": 13113,
+    "cvr_pct": 2.27,
+    "ad_spend": 7116.22,
+    "roas": 8.33,
+    "contrib_approx": 19569.59
+  },
+  {
+    "channel": "referral",
+    "orders": 248,
+    "revenue": 56063.28,
+    "aov": 226.06,
+    "sessions": 9891,
+    "cvr_pct": 2.54,
+    "ad_spend": 1121.27,
+    "roas": 50.0,
+    "contrib_approx": 24107.21
+  }
+]

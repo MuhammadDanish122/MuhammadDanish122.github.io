@@ -1,0 +1,20 @@
+{
+  "orders": 3844,
+  "revenue": 809829.07,
+  "aov": 210.67,
+  "gross_margin_pct": 53.6,
+  "sessions": 163303,
+  "customers": 2400,
+  "returns": 329,
+  "refunds": 32848.96,
+  "conversion_rate_pct": 2.35,
+  "last_7d_revenue": 55265.58,
+  "prev_7d_revenue": 77817.7,
+  "revenue_wow_pct": -29.0,
+  "window": {
+    "start": "2026-07-22",
+    "end": "2026-10-19"
+  },
+  "label": "DEMO \u2014 sample store data",
+  "store_name": "Lumen Atelier (demo)"
+}

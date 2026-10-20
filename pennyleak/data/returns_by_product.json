@@ -1,0 +1,107 @@
+[
+  {
+    "sku": "DEMO-HOM-COO-04",
+    "name": "Nonstick Fry Pan",
+    "category": "Home",
+    "returns": 5,
+    "refunds": 1421.4
+  },
+  {
+    "sku": "DEMO-FOO-BOO-01",
+    "name": "Chelsea Leather Boot",
+    "category": "Footwear",
+    "returns": 5,
+    "refunds": 1194.5
+  },
+  {
+    "sku": "DEMO-ELE-WEA-02",
+    "name": "Halo Smart Watch",
+    "category": "Electronics",
+    "returns": 7,
+    "refunds": 1103.76
+  },
+  {
+    "sku": "DEMO-APP-JAC-01",
+    "name": "Waxed Field Jacket",
+    "category": "Apparel",
+    "returns": 4,
+    "refunds": 983.03
+  },
+  {
+    "sku": "DEMO-FOO-SLI-02",
+    "name": "Leather Strap Slide",
+    "category": "Footwear",
+    "returns": 6,
+    "refunds": 880.73
+  },
+  {
+    "sku": "DEMO-BEA-SKI-02",
+    "name": "Vitamin C Serum",
+    "category": "Beauty",
+    "returns": 5,
+    "refunds": 856.15
+  },
+  {
+    "sku": "DEMO-BEA-SKI-01",
+    "name": "Barrier Repair Cream",
+    "category": "Beauty",
+    "returns": 5,
+    "refunds": 843.79
+  },
+  {
+    "sku": "DEMO-HOM-COO-06",
+    "name": "Stainless Stock Pot",
+    "category": "Home",
+    "returns": 7,
+    "refunds": 818.82
+  },
+  {
+    "sku": "DEMO-BEA-FRA-04",
+    "name": "Velvet Iris EDP",
+    "category": "Beauty",
+    "returns": 4,
+    "refunds": 806.08
+  },
+  {
+    "sku": "DEMO-ELE-CHA-02",
+    "name": "MagSnap Power Bank",
+    "category": "Electronics",
+    "returns": 3,
+    "refunds": 804.67
+  },
+  {
+    "sku": "DEMO-APP-JAC-02",
+    "name": "Quilted Liner Jacket",
+    "category": "Apparel",
+    "returns": 7,
+    "refunds": 797.58
+  },
+  {
+    "sku": "DEMO-APP-JEA-03",
+    "name": "High-Rise Wide Leg",
+    "category": "Apparel",
+    "returns": 6,
+    "refunds": 790.56
+  },
+  {
+    "sku": "DEMO-HOM-COO-01",
+    "name": "Cast Iron Skillet 10\"",
+    "category": "Home",
+    "returns": 6,
+    "refunds": 761.29
+  },
+  {
+    "sku": "DEMO-HOM-LIN-04",
+    "name": "Linen Pillowcase Pair",
+    "category": "Home",
+    "returns": 5,
+    "refunds": 747.42
+  },
+  {
+    "sku": "DEMO-APP-TEE-03",
+    "name": "Linen Blend V-Neck",
+    "category": "Apparel",
+    "returns": 5,
+    "refunds": 743.19
+  }
+]

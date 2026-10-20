@@ -1,0 +1,90 @@
+[
+  {
+    "id": "churn_risk",
+    "severity": "high",
+    "category": "Customers",
+    "title": "15 high-value customers worth $20,838 look ready to leave",
+    "summary": "They spent well before, then went quiet for 30+ days. A personal win-back recovers more than a broad discount blast.",
+    "impact_usd": 20837.95,
+    "impact_label": "revenue at risk",
+    "action": "Send a personal note plus one relevant offer to these 15 customers only.",
+    "rank": 1
+  },
+  {
+    "id": "mobile_checkout",
+    "severity": "high",
+    "category": "Revenue leak",
+    "title": "Mobile checkout friction cost about $12,404 this week",
+    "summary": "Revenue fell $22,552 week over week. Mobile is 62% of traffic, so when checkout stumbles there the whole week feels it.",
+    "impact_usd": 12403.67,
+    "impact_label": "estimated weekly loss",
+    "action": "Cut mobile checkout to 2 steps and switch on Apple Pay / Google Pay this week.",
+    "rank": 2
+  },
+  {
+    "id": "hidden_margin",
+    "severity": "medium",
+    "category": "Products",
+    "title": "Selvedge Raw Jean is your quiet margin winner",
+    "summary": "67.1% margin and $7,927 profit, stronger than several louder bestsellers.",
+    "impact_usd": 7927.34,
+    "impact_label": "margin dollars in 90 days",
+    "action": "Feature it on the homepage and in email. Give it the creative budget bestsellers already get.",
+    "rank": 3
+  },
+  {
+    "id": "supplier_returns",
+    "severity": "medium",
+    "category": "Supply",
+    "title": "Harbor Textile Partners is tied to $7,414 in refunds (23% of return $)",
+    "summary": "Returns cluster on one supplier more than the others. That usually points to packing, sizing guides or late inbound stock.",
+    "impact_usd": 7414.25,
+    "impact_label": "refunds linked",
+    "action": "Open a quality review before the next PO and compare return reasons side by side.",
+    "rank": 4
+  },
+  {
+    "id": "late_delivery_returns",
+    "severity": "medium",
+    "category": "Operations",
+    "title": "Late delivery drove 20% of returns ($7,386)",
+    "summary": "Customers who wait too long refund even when the product is fine. Clear delivery promises and shipping updates win this back.",
+    "impact_usd": 7385.75,
+    "impact_label": "refunds from late delivery",
+    "action": "Promise 'ships in 48h' only on pick-ready SKUs and send proactive tracking updates.",
+    "rank": 5
+  },
+  {
+    "id": "paid_search_gap",
+    "severity": "medium",
+    "category": "Marketing",
+    "title": "Paid search is $5,880 below last week",
+    "summary": "Search usually converts cleaner than social. A dip often means wasted keywords or a landing page that no longer matches the promo.",
+    "impact_usd": 5880.44,
+    "impact_label": "week-over-week gap",
+    "action": "Check brand vs non-brand split and pause terms returning under 2\u00d7 ad spend.",
+    "rank": 6
+  },
+  {
+    "id": "paid_social_decay",
+    "severity": "high",
+    "category": "Marketing",
+    "title": "Paid social lost $4,180 vs last week as creative ages out",
+    "summary": "Paid social carries the mix. When the same ads run past a few days, spend keeps going while results shrink.",
+    "impact_usd": 4180.4,
+    "impact_label": "week-over-week revenue gap",
+    "action": "Pause creatives older than 3\u20134 days, rotate 2 new hooks and cap frequency.",
+    "rank": 7
+  },
+  {
+    "id": "restock",
+    "severity": "medium",
+    "category": "Inventory",
+    "title": "Restock watch: Leather Strap Slide is your fastest seller",
+    "summary": "115 units and $14,373 revenue in 90 days. A stockout here hurts more than on long-tail SKUs.",
+    "impact_usd": 1724.76,
+    "impact_label": "estimated loss if it stocks out",
+    "action": "Confirm 4 weeks of cover with the supplier and set a reorder alert.",
+    "rank": 8
+  }
+]

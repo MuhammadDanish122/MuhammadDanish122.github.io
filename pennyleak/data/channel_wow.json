@@ -1,0 +1,37 @@
+[
+  {
+    "channel": "paid_search",
+    "this_week": 11566.5,
+    "prev_week": 17446.94
+  },
+  {
+    "channel": "email",
+    "this_week": 6102.18,
+    "prev_week": 11847.1
+  },
+  {
+    "channel": "organic_search",
+    "this_week": 12252.95,
+    "prev_week": 17579.85
+  },
+  {
+    "channel": "paid_social",
+    "this_week": 11517.07,
+    "prev_week": 15697.47
+  },
+  {
+    "channel": "direct",
+    "this_week": 4709.83,
+    "prev_week": 7042.7
+  },
+  {
+    "channel": "referral",
+    "this_week": 5473.18,
+    "prev_week": 5254.71
+  },
+  {
+    "channel": "affiliate",
+    "this_week": 3643.87,
+    "prev_week": 2948.93
+  }
+]

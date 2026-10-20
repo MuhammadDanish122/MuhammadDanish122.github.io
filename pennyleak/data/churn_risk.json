@@ -1,0 +1,137 @@
+[
+  {
+    "customer_id": 945,
+    "name": "Hana Patel",
+    "city": "Sao Paulo",
+    "country": "BR",
+    "recency_days": 44,
+    "orders": 4,
+    "spend": 1920.88
+  },
+  {
+    "customer_id": 238,
+    "name": "Rita Diaz",
+    "city": "Singapore",
+    "country": "SG",
+    "recency_days": 38,
+    "orders": 3,
+    "spend": 1541.29
+  },
+  {
+    "customer_id": 2222,
+    "name": "Sofia Park",
+    "city": "New York",
+    "country": "US",
+    "recency_days": 36,
+    "orders": 4,
+    "spend": 1515.48
+  },
+  {
+    "customer_id": 2399,
+    "name": "Theo Yamamoto",
+    "city": "Dubai",
+    "country": "AE",
+    "recency_days": 39,
+    "orders": 4,
+    "spend": 1478.7
+  },
+  {
+    "customer_id": 2102,
+    "name": "Theo Costa",
+    "city": "Berlin",
+    "country": "DE",
+    "recency_days": 36,
+    "orders": 5,
+    "spend": 1425.98
+  },
+  {
+    "customer_id": 1982,
+    "name": "Zoe Diaz",
+    "city": "London",
+    "country": "UK",
+    "recency_days": 34,
+    "orders": 3,
+    "spend": 1425.31
+  },
+  {
+    "customer_id": 113,
+    "name": "Rita Costa",
+    "city": "Toronto",
+    "country": "CA",
+    "recency_days": 43,
+    "orders": 4,
+    "spend": 1341.15
+  },
+  {
+    "customer_id": 741,
+    "name": "Zoe Lopez",
+    "city": "Berlin",
+    "country": "DE",
+    "recency_days": 30,
+    "orders": 4,
+    "spend": 1324.11
+  },
+  {
+    "customer_id": 338,
+    "name": "Noah Silva",
+    "city": "Singapore",
+    "country": "SG",
+    "recency_days": 44,
+    "orders": 4,
+    "spend": 1312.54
+  },
+  {
+    "customer_id": 2029,
+    "name": "Sam Lee",
+    "city": "Singapore",
+    "country": "SG",
+    "recency_days": 38,
+    "orders": 3,
+    "spend": 1303.33
+  },
+  {
+    "customer_id": 2286,
+    "name": "Theo Kim",
+    "city": "Dubai",
+    "country": "AE",
+    "recency_days": 48,
+    "orders": 4,
+    "spend": 1291.78
+  },
+  {
+    "customer_id": 1878,
+    "name": "Noah Ali",
+    "city": "Los Angeles",
+    "country": "US",
+    "recency_days": 46,
+    "orders": 3,
+    "spend": 1251.16
+  },
+  {
+    "customer_id": 911,
+    "name": "Liam Patel",
+    "city": "Sydney",
+    "country": "AU",
+    "recency_days": 43,
+    "orders": 4,
+    "spend": 1241.22
+  },
+  {
+    "customer_id": 1701,
+    "name": "Theo Diaz",
+    "city": "Sao Paulo",
+    "country": "BR",
+    "recency_days": 36,
+    "orders": 4,
+    "spend": 1240.67
+  },
+  {
+    "customer_id": 683,
+    "name": "Liam Singh",
+    "city": "Singapore",
+    "country": "SG",
+    "recency_days": 52,
+    "orders": 4,
+    "spend": 1224.35
+  }
+]

@@ -1,0 +1,632 @@
+[
+  {
+    "dt": "2026-07-22",
+    "revenue": 8042.0,
+    "orders": 38,
+    "cogs": 3832.58,
+    "sessions": 1425
+  },
+  {
+    "dt": "2026-07-23",
+    "revenue": 7646.91,
+    "orders": 40,
+    "cogs": 3558.72,
+    "sessions": 1790
+  },
+  {
+    "dt": "2026-07-24",
+    "revenue": 8629.82,
+    "orders": 43,
+    "cogs": 3936.58,
+    "sessions": 2127
+  },
+  {
+    "dt": "2026-07-25",
+    "revenue": 8885.69,
+    "orders": 40,
+    "cogs": 4080.8,
+    "sessions": 1597
+  },
+  {
+    "dt": "2026-07-26",
+    "revenue": 10101.9,
+    "orders": 45,
+    "cogs": 4682.82,
+    "sessions": 1509
+  },
+  {
+    "dt": "2026-07-27",
+    "revenue": 8316.55,
+    "orders": 38,
+    "cogs": 3846.45,
+    "sessions": 2131
+  },
+  {
+    "dt": "2026-07-28",
+    "revenue": 11510.7,
+    "orders": 55,
+    "cogs": 5176.53,
+    "sessions": 1981
+  },
+  {
+    "dt": "2026-07-29",
+    "revenue": 7095.11,
+    "orders": 32,
+    "cogs": 3141.96,
+    "sessions": 1374
+  },
+  {
+    "dt": "2026-07-30",
+    "revenue": 5622.19,
+    "orders": 31,
+    "cogs": 2625.67,
+    "sessions": 1190
+  },
+  {
+    "dt": "2026-07-31",
+    "revenue": 8395.54,
+    "orders": 43,
+    "cogs": 3915.76,
+    "sessions": 1617
+  },
+  {
+    "dt": "2026-08-01",
+    "revenue": 9811.54,
+    "orders": 49,
+    "cogs": 4596.54,
+    "sessions": 2035
+  },
+  {
+    "dt": "2026-08-02",
+    "revenue": 9908.33,
+    "orders": 43,
+    "cogs": 4717.32,
+    "sessions": 1958
+  },
+  {
+    "dt": "2026-08-03",
+    "revenue": 9579.38,
+    "orders": 44,
+    "cogs": 4473.57,
+    "sessions": 2019
+  },
+  {
+    "dt": "2026-08-04",
+    "revenue": 8290.99,
+    "orders": 36,
+    "cogs": 3812.01,
+    "sessions": 1260
+  },
+  {
+    "dt": "2026-08-05",
+    "revenue": 7267.86,
+    "orders": 33,
+    "cogs": 3403.0,
+    "sessions": 1628
+  },
+  {
+    "dt": "2026-08-06",
+    "revenue": 8332.53,
+    "orders": 35,
+    "cogs": 3937.19,
+    "sessions": 1696
+  },
+  {
+    "dt": "2026-08-07",
+    "revenue": 6637.47,
+    "orders": 43,
+    "cogs": 3161.49,
+    "sessions": 1442
+  },
+  {
+    "dt": "2026-08-08",
+    "revenue": 12703.96,
+    "orders": 56,
+    "cogs": 5846.8,
+    "sessions": 3041
+  },
+  {
+    "dt": "2026-08-09",
+    "revenue": 10009.27,
+    "orders": 39,
+    "cogs": 4532.76,
+    "sessions": 1430
+  },
+  {
+    "dt": "2026-08-10",
+    "revenue": 9543.19,
+    "orders": 36,
+    "cogs": 4458.04,
+    "sessions": 1479
+  },
+  {
+    "dt": "2026-08-11",
+    "revenue": 8266.08,
+    "orders": 37,
+    "cogs": 3726.76,
+    "sessions": 1821
+  },
+  {
+    "dt": "2026-08-12",
+    "revenue": 6498.3,
+    "orders": 33,
+    "cogs": 3125.49,
+    "sessions": 1659
+  },
+  {
+    "dt": "2026-08-13",
+    "revenue": 7973.22,
+    "orders": 41,
+    "cogs": 3582.98,
+    "sessions": 1380
+  },
+  {
+    "dt": "2026-08-14",
+    "revenue": 7759.71,
+    "orders": 39,
+    "cogs": 3665.58,
+    "sessions": 1505
+  },
+  {
+    "dt": "2026-08-15",
+    "revenue": 7871.55,
+    "orders": 30,
+    "cogs": 3688.28,
+    "sessions": 1565
+  },
+  {
+    "dt": "2026-08-16",
+    "revenue": 9269.48,
+    "orders": 42,
+    "cogs": 4442.13,
+    "sessions": 1403
+  },
+  {
+    "dt": "2026-08-17",
+    "revenue": 7360.99,
+    "orders": 35,
+    "cogs": 3561.53,
+    "sessions": 1679
+  },
+  {
+    "dt": "2026-08-18",
+    "revenue": 10026.51,
+    "orders": 50,
+    "cogs": 4712.83,
+    "sessions": 1640
+  },
+  {
+    "dt": "2026-08-19",
+    "revenue": 9184.56,
+    "orders": 47,
+    "cogs": 4262.34,
+    "sessions": 2580
+  },
+  {
+    "dt": "2026-08-20",
+    "revenue": 5455.33,
+    "orders": 28,
+    "cogs": 2597.22,
+    "sessions": 1363
+  },
+  {
+    "dt": "2026-08-21",
+    "revenue": 6796.22,
+    "orders": 44,
+    "cogs": 3300.17,
+    "sessions": 2046
+  },
+  {
+    "dt": "2026-08-22",
+    "revenue": 11273.15,
+    "orders": 52,
+    "cogs": 4867.57,
+    "sessions": 1793
+  },
+  {
+    "dt": "2026-08-23",
+    "revenue": 9370.67,
+    "orders": 43,
+    "cogs": 4268.26,
+    "sessions": 1411
+  },
+  {
+    "dt": "2026-08-24",
+    "revenue": 10430.9,
+    "orders": 49,
+    "cogs": 4780.24,
+    "sessions": 1799
+  },
+  {
+    "dt": "2026-08-25",
+    "revenue": 11739.64,
+    "orders": 46,
+    "cogs": 5385.28,
+    "sessions": 1941
+  },
+  {
+    "dt": "2026-08-26",
+    "revenue": 10376.84,
+    "orders": 49,
+    "cogs": 4807.11,
+    "sessions": 1903
+  },
+  {
+    "dt": "2026-08-27",
+    "revenue": 7908.81,
+    "orders": 35,
+    "cogs": 3861.76,
+    "sessions": 1429
+  },
+  {
+    "dt": "2026-08-28",
+    "revenue": 9290.66,
+    "orders": 42,
+    "cogs": 4309.93,
+    "sessions": 1791
+  },
+  {
+    "dt": "2026-08-29",
+    "revenue": 7254.13,
+    "orders": 48,
+    "cogs": 3371.83,
+    "sessions": 1594
+  },
+  {
+    "dt": "2026-08-30",
+    "revenue": 10805.91,
+    "orders": 41,
+    "cogs": 5156.16,
+    "sessions": 1786
+  },
+  {
+    "dt": "2026-08-31",
+    "revenue": 5060.1,
+    "orders": 26,
+    "cogs": 2540.7,
+    "sessions": 1442
+  },
+  {
+    "dt": "2026-09-01",
+    "revenue": 11610.13,
+    "orders": 46,
+    "cogs": 5268.68,
+    "sessions": 1759
+  },
+  {
+    "dt": "2026-09-02",
+    "revenue": 8964.41,
+    "orders": 43,
+    "cogs": 4092.27,
+    "sessions": 1619
+  },
+  {
+    "dt": "2026-09-03",
+    "revenue": 5877.28,
+    "orders": 39,
+    "cogs": 2704.59,
+    "sessions": 1932
+  },
+  {
+    "dt": "2026-09-04",
+    "revenue": 8313.99,
+    "orders": 41,
+    "cogs": 3801.63,
+    "sessions": 1879
+  },
+  {
+    "dt": "2026-09-05",
+    "revenue": 11637.02,
+    "orders": 47,
+    "cogs": 5146.87,
+    "sessions": 1795
+  },
+  {
+    "dt": "2026-09-06",
+    "revenue": 11231.95,
+    "orders": 54,
+    "cogs": 5119.47,
+    "sessions": 2542
+  },
+  {
+    "dt": "2026-09-07",
+    "revenue": 7805.91,
+    "orders": 38,
+    "cogs": 3833.13,
+    "sessions": 1784
+  },
+  {
+    "dt": "2026-09-08",
+    "revenue": 8569.98,
+    "orders": 41,
+    "cogs": 4027.56,
+    "sessions": 2012
+  },
+  {
+    "dt": "2026-09-09",
+    "revenue": 9572.09,
+    "orders": 43,
+    "cogs": 4352.05,
+    "sessions": 1937
+  },
+  {
+    "dt": "2026-09-10",
+    "revenue": 10146.45,
+    "orders": 41,
+    "cogs": 4665.31,
+    "sessions": 1350
+  },
+  {
+    "dt": "2026-09-11",
+    "revenue": 11409.17,
+    "orders": 54,
+    "cogs": 5174.9,
+    "sessions": 2805
+  },
+  {
+    "dt": "2026-09-12",
+    "revenue": 12634.32,
+    "orders": 64,
+    "cogs": 6005.63,
+    "sessions": 2427
+  },
+  {
+    "dt": "2026-09-13",
+    "revenue": 10791.68,
+    "orders": 54,
+    "cogs": 4898.29,
+    "sessions": 2851
+  },
+  {
+    "dt": "2026-09-14",
+    "revenue": 8526.11,
+    "orders": 41,
+    "cogs": 4077.66,
+    "sessions": 1647
+  },
+  {
+    "dt": "2026-09-15",
+    "revenue": 8770.06,
+    "orders": 46,
+    "cogs": 4169.2,
+    "sessions": 1899
+  },
+  {
+    "dt": "2026-09-16",
+    "revenue": 10922.04,
+    "orders": 60,
+    "cogs": 5170.5,
+    "sessions": 2254
+  },
+  {
+    "dt": "2026-09-17",
+    "revenue": 5344.92,
+    "orders": 32,
+    "cogs": 2551.44,
+    "sessions": 1630
+  },
+  {
+    "dt": "2026-09-18",
+    "revenue": 7548.24,
+    "orders": 48,
+    "cogs": 3699.71,
+    "sessions": 2633
+  },
+  {
+    "dt": "2026-09-19",
+    "revenue": 7348.25,
+    "orders": 32,
+    "cogs": 3342.67,
+    "sessions": 1411
+  },
+  {
+    "dt": "2026-09-20",
+    "revenue": 13605.84,
+    "orders": 55,
+    "cogs": 6282.33,
+    "sessions": 2789
+  },
+  {
+    "dt": "2026-09-21",
+    "revenue": 7942.86,
+    "orders": 47,
+    "cogs": 3541.82,
+    "sessions": 1526
+  },
+  {
+    "dt": "2026-09-22",
+    "revenue": 8450.06,
+    "orders": 39,
+    "cogs": 3835.19,
+    "sessions": 1636
+  },
+  {
+    "dt": "2026-09-23",
+    "revenue": 8558.68,
+    "orders": 37,
+    "cogs": 3980.03,
+    "sessions": 1785
+  },
+  {
+    "dt": "2026-09-24",
+    "revenue": 8440.7,
+    "orders": 42,
+    "cogs": 4112.97,
+    "sessions": 2109
+  },
+  {
+    "dt": "2026-09-25",
+    "revenue": 9911.59,
+    "orders": 51,
+    "cogs": 4573.83,
+    "sessions": 2581
+  },
+  {
+    "dt": "2026-09-26",
+    "revenue": 8925.59,
+    "orders": 46,
+    "cogs": 4163.09,
+    "sessions": 1923
+  },
+  {
+    "dt": "2026-09-27",
+    "revenue": 10187.89,
+    "orders": 47,
+    "cogs": 4756.75,
+    "sessions": 2136
+  },
+  {
+    "dt": "2026-09-28",
+    "revenue": 7902.93,
+    "orders": 42,
+    "cogs": 3548.3,
+    "sessions": 1706
+  },
+  {
+    "dt": "2026-09-29",
+    "revenue": 7994.38,
+    "orders": 48,
+    "cogs": 3777.63,
+    "sessions": 1789
+  },
+  {
+    "dt": "2026-09-30",
+    "revenue": 8537.42,
+    "orders": 48,
+    "cogs": 3913.11,
+    "sessions": 1867
+  },
+  {
+    "dt": "2026-10-01",
+    "revenue": 7785.3,
+    "orders": 43,
+    "cogs": 3569.93,
+    "sessions": 1409
+  },
+  {
+    "dt": "2026-10-02",
+    "revenue": 11597.31,
+    "orders": 50,
+    "cogs": 5305.83,
+    "sessions": 1729
+  },
+  {
+    "dt": "2026-10-03",
+    "revenue": 9125.67,
+    "orders": 43,
+    "cogs": 4248.12,
+    "sessions": 1729
+  },
+  {
+    "dt": "2026-10-04",
+    "revenue": 6635.0,
+    "orders": 34,
+    "cogs": 3097.65,
+    "sessions": 1721
+  },
+  {
+    "dt": "2026-10-05",
+    "revenue": 7816.88,
+    "orders": 39,
+    "cogs": 3621.2,
+    "sessions": 1255
+  },
+  {
+    "dt": "2026-10-06",
+    "revenue": 10221.28,
+    "orders": 45,
+    "cogs": 4814.51,
+    "sessions": 1555
+  },
+  {
+    "dt": "2026-10-07",
+    "revenue": 10203.28,
+    "orders": 43,
+    "cogs": 4604.04,
+    "sessions": 1690
+  },
+  {
+    "dt": "2026-10-08",
+    "revenue": 7500.43,
+    "orders": 38,
+    "cogs": 3574.6,
+    "sessions": 1446
+  },
+  {
+    "dt": "2026-10-09",
+    "revenue": 13694.23,
+    "orders": 57,
+    "cogs": 6165.79,
+    "sessions": 2238
+  },
+  {
+    "dt": "2026-10-10",
+    "revenue": 13692.24,
+    "orders": 56,
+    "cogs": 6419.83,
+    "sessions": 2632
+  },
+  {
+    "dt": "2026-10-11",
+    "revenue": 12172.85,
+    "orders": 51,
+    "cogs": 5706.76,
+    "sessions": 1599
+  },
+  {
+    "dt": "2026-10-12",
+    "revenue": 10333.39,
+    "orders": 47,
+    "cogs": 4725.04,
+    "sessions": 2093
+  },
+  {
+    "dt": "2026-10-13",
+    "revenue": 8827.89,
+    "orders": 35,
+    "cogs": 4029.71,
+    "sessions": 1441
+  },
+  {
+    "dt": "2026-10-14",
+    "revenue": 8713.22,
+    "orders": 37,
+    "cogs": 4084.26,
+    "sessions": 1404
+  },
+  {
+    "dt": "2026-10-15",
+    "revenue": 9204.63,
+    "orders": 47,
+    "cogs": 4162.04,
+    "sessions": 1977
+  },
+  {
+    "dt": "2026-10-16",
+    "revenue": 8116.24,
+    "orders": 38,
+    "cogs": 3809.32,
+    "sessions": 2099
+  },
+  {
+    "dt": "2026-10-17",
+    "revenue": 7299.5,
+    "orders": 35,
+    "cogs": 3357.01,
+    "sessions": 1902
+  },
+  {
+    "dt": "2026-10-18",
+    "revenue": 8036.03,
+    "orders": 37,
+    "cogs": 3552.0,
+    "sessions": 1669
+  },
+  {
+    "dt": "2026-10-19",
+    "revenue": 5068.07,
+    "orders": 27,
+    "cogs": 2229.47,
+    "sessions": 1443
+  }
+]

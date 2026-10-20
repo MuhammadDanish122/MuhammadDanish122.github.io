@@ -1,0 +1,50 @@
+[
+  {
+    "segment": "Champions",
+    "customers": 328,
+    "avg_spend": 796.6,
+    "total_spend": 261285.17,
+    "avg_orders": 3.3,
+    "avg_recency_days": 10.7
+  },
+  {
+    "segment": "Loyal",
+    "customers": 527,
+    "avg_spend": 443.05,
+    "total_spend": 233488.76,
+    "avg_orders": 2.38,
+    "avg_recency_days": 19.3
+  },
+  {
+    "segment": "At Risk",
+    "customers": 220,
+    "avg_spend": 684.35,
+    "total_spend": 150556.12,
+    "avg_orders": 2.25,
+    "avg_recency_days": 50.6
+  },
+  {
+    "segment": "Hibernating",
+    "customers": 417,
+    "avg_spend": 160.01,
+    "total_spend": 66723.72,
+    "avg_orders": 1.0,
+    "avg_recency_days": 62.4
+  },
+  {
+    "segment": "Potential",
+    "customers": 238,
+    "avg_spend": 231.6,
+    "total_spend": 55121.11,
+    "avg_orders": 1.67,
+    "avg_recency_days": 41.2
+  },
+  {
+    "segment": "New",
+    "customers": 200,
+    "avg_spend": 213.27,
+    "total_spend": 42654.19,
+    "avg_orders": 1.0,
+    "avg_recency_days": 10.3
+  }
+]

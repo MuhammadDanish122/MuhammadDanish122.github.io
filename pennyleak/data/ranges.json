@@ -1,0 +1,146 @@
+{
+  "7": {
+    "revenue": 55265.58,
+    "orders": 256,
+    "aov": 215.88,
+    "margin_pct": 54.4,
+    "customers": 244,
+    "sessions": 11935,
+    "conversion_pct": 2.14,
+    "revenue_change_pct": -29.0,
+    "orders_change_pct": -24.0,
+    "channels": [
+      {
+        "channel": "organic_search",
+        "revenue": 12252.95,
+        "orders": 60
+      },
+      {
+        "channel": "paid_search",
+        "revenue": 11566.5,
+        "orders": 45
+      },
+      {
+        "channel": "paid_social",
+        "revenue": 11517.07,
+        "orders": 60
+      },
+      {
+        "channel": "email",
+        "revenue": 6102.18,
+        "orders": 25
+      },
+      {
+        "channel": "referral",
+        "revenue": 5473.18,
+        "orders": 23
+      },
+      {
+        "channel": "direct",
+        "revenue": 4709.83,
+        "orders": 26
+      },
+      {
+        "channel": "affiliate",
+        "revenue": 3643.87,
+        "orders": 17
+      }
+    ]
+  },
+  "30": {
+    "revenue": 276501.38,
+    "orders": 1304,
+    "aov": 212.04,
+    "margin_pct": 53.9,
+    "customers": 1021,
+    "sessions": 54878,
+    "conversion_pct": 2.38,
+    "revenue_change_pct": -0.3,
+    "orders_change_pct": -2.6,
+    "channels": [
+      {
+        "channel": "organic_search",
+        "revenue": 58837.39,
+        "orders": 288
+      },
+      {
+        "channel": "paid_social",
+        "revenue": 57463.16,
+        "orders": 291
+      },
+      {
+        "channel": "paid_search",
+        "revenue": 56600.86,
+        "orders": 245
+      },
+      {
+        "channel": "email",
+        "revenue": 38365.06,
+        "orders": 164
+      },
+      {
+        "channel": "direct",
+        "revenue": 28948.96,
+        "orders": 135
+      },
+      {
+        "channel": "referral",
+        "revenue": 20776.6,
+        "orders": 99
+      },
+      {
+        "channel": "affiliate",
+        "revenue": 15509.35,
+        "orders": 82
+      }
+    ]
+  },
+  "90": {
+    "revenue": 809829.07,
+    "orders": 3844,
+    "aov": 210.67,
+    "margin_pct": 53.6,
+    "customers": 1930,
+    "sessions": 163303,
+    "conversion_pct": 2.35,
+    "revenue_change_pct": null,
+    "orders_change_pct": null,
+    "channels": [
+      {
+        "channel": "paid_social",
+        "revenue": 188480.99,
+        "orders": 902
+      },
+      {
+        "channel": "organic_search",
+        "revenue": 174942.85,
+        "orders": 865
+      },
+      {
+        "channel": "paid_search",
+        "revenue": 150733.58,
+        "orders": 692
+      },
+      {
+        "channel": "email",
+        "revenue": 96774.6,
+        "orders": 445
+      },
+      {
+        "channel": "direct",
+        "revenue": 83531.96,
+        "orders": 399
+      },
+      {
+        "channel": "affiliate",
+        "revenue": 59301.81,
+        "orders": 293
+      },
+      {
+        "channel": "referral",
+        "revenue": 56063.28,
+        "orders": 248
+      }
+    ]
+  }
+}

@@ -12,7 +12,7 @@ Pennyleak finds the money a business is quietly losing and explains it in plain 
 | Trucking | [Open](https://muhammaddanish122.github.io/pennyleak/#/trucking/app) | Lanes that lose money, empty-mile creep, unbilled detention, slow payers |
 | Medical Billing | [Open](https://muhammaddanish122.github.io/pennyleak/#/medical/app) | Recoverable denials, payer underpayments, missed charges, old A/R |
 
-Every page has **Pennyleak AI**, a chat you can ask about what's on screen.
+Every edition includes **Pennyleak AI**: Morning Briefing, "Why did this happen?" explanations, a what-if simulator, 30/90-day forecasts with early warnings, an anomaly radar, one-click action plans with ready drafts, a money-recovered tracker, and an ask-anything bar (⌘K) plus chat on every page.
 
 All demo numbers are made-up sample data. The Medical Billing demo contains **no real patient data**: every clinic, provider and payer is fictional and de-identified.
 

@@ -20,3 +20,6 @@ Free 1-month trial on your own data: daneshrana45@gmail.com
 
 ---
 Pennyleak · Helsinki, Finland · Built by [Muhammad Danish Ishfaq](https://muhammaddanish122.github.io)
+
+## Built with (open source, permissive licences)
+React (MIT), Vite (MIT), Tailwind CSS (MIT), Recharts (MIT), Framer Motion (MIT), Lucide icons (ISC), React Router (MIT). No third-party UI component code, designs or brand assets were copied. The ⌘K command bar, KPI cards and onboarding steps are original implementations of common SaaS patterns.

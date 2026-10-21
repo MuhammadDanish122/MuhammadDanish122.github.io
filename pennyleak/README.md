@@ -1,28 +1,22 @@
-# Pennyleak (product demo)
+# Pennyleak
 
-Client-facing ecommerce insights product: it finds the money a store is quietly losing and explains it in plain English. Static React build for GitHub Pages.
+Pennyleak finds the money a business is quietly losing and explains it in plain English: what it's worth and what to do about it this week.
 
 **Live:** https://muhammaddanish122.github.io/pennyleak/
 
-## Stack
+## Editions
 
-- React + Vite + TypeScript
-- Tailwind CSS v4
-- Recharts + Framer Motion
-- Demo metrics from a sample store → `public/data/*.json`
+| Edition | Live demo | Finds things like |
+| --- | --- | --- |
+| Ecommerce | [Open](https://muhammaddanish122.github.io/pennyleak/#/app) | High-value customers going quiet, ads that don't sell, return drivers |
+| Trucking | [Open](https://muhammaddanish122.github.io/pennyleak/#/trucking/app) | Lanes that lose money, empty-mile creep, unbilled detention, slow payers |
+| Medical Billing | [Open](https://muhammaddanish122.github.io/pennyleak/#/medical/app) | Recoverable denials, payer underpayments, missed charges, old A/R |
 
-## Develop
+Every page has **Pennyleak AI**, a chat you can ask about what's on screen.
 
-```bash
-npm install
-npm run dev
-```
+All demo numbers are made-up sample data. The Medical Billing demo contains **no real patient data**: every clinic, provider and payer is fictional and de-identified.
 
-## Build for Pages (`/pennyleak/` base)
+Free 1-month trial on your own data: daneshrana45@gmail.com
 
-```bash
-npm run build
-# output in dist/, deploy its contents to the /pennyleak/ folder of the Pages site
-```
-
-All numbers in the demo come from a generated sample store, not a real client.
+---
+Pennyleak · Helsinki, Finland · Built by [Muhammad Danish Ishfaq](https://muhammaddanish122.github.io)

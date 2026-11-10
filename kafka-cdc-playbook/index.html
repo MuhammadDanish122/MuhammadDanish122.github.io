@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zero-Loss CDC Playbook: MySQL, Debezium, Kafka KRaft to ClickHouse</title>
+<meta name="description" content="Build a CDC pipeline that does not lose rows: MySQL binlog, Debezium, Kafka KRaft, Python consumers, ClickHouse, fail-closed offsets, reconciliation, backfills.">
+<link rel="canonical" href="https://muhammaddanish122.github.io/kafka-cdc-playbook/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#05070d"><meta name="color-scheme" content="dark">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Danish Rajpoot">
+<meta property="og:title" content="Zero-Loss CDC: the production playbook for MySQL → Debezium → Kafka → ClickHouse"><meta property="og:description" content="Build a CDC pipeline that does not lose rows: MySQL binlog, Debezium, Kafka KRaft, Python consumers, ClickHouse, fail-closed offsets, reconciliation, backfills.">
+<meta property="og:url" content="https://muhammaddanish122.github.io/kafka-cdc-playbook/"><meta property="og:image" content="https://muhammaddanish122.github.io/kafka-cdc-playbook/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Zero-Loss CDC: the production playbook for MySQL → Debezium → Kafka → ClickHouse">
+<meta name="twitter:description" content="Build a CDC pipeline that does not lose rows: MySQL binlog, Debezium, Kafka KRaft, Python consumers, ClickHouse, fail-closed offsets, reconciliation, backfills.">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Zero-Loss CDC playbook: MySQL to Debezium to Kafka to ClickHouse pipeline diagram"><meta name="twitter:image" content="https://muhammaddanish122.github.io/kafka-cdc-playbook/og.png"><meta name="author" content="Danish Rajpoot">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>:root{--a1:#fb923c;--a2:#facc15;--a3:#22d3ee;--pc:251,146,60;--pc2:250,204,21;--pc3:34,211,238;--btnink:#2a1203}
+:root{--bg:#05070d;--ink:#eef2ff;--mute:#a9b2c7;--dim:#8a93a9;--line:rgba(255,255,255,.09);--glass:rgba(255,255,255,.045);--r:20px;--warn:#fbbf24;--ok:#34d399;--disp:"Space Grotesk",Inter,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--a1)}img,svg{max-width:100%}
+:focus-visible{outline:2px solid var(--a1);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;z-index:100;background:#fff;color:#000;padding:8px 14px;border-radius:8px}.skip:focus{left:8px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.aurora{position:fixed;inset:0;z-index:-3;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;width:70vmax;height:70vmax;border-radius:50%;opacity:.5;animation:drift 28s ease-in-out infinite alternate;will-change:transform}
+.aurora i:nth-child(1){background:radial-gradient(circle,rgba(var(--pc),.38),transparent 62%);top:-38vmax;left:-22vmax}
+.aurora i:nth-child(2){background:radial-gradient(circle,rgba(var(--pc2),.30),transparent 62%);top:-10vmax;right:-34vmax;animation-duration:34s;animation-direction:alternate-reverse}
+.aurora i:nth-child(3){background:radial-gradient(circle,rgba(var(--pc3),.18),transparent 62%);bottom:-46vmax;left:10vmax;animation-duration:40s}
+@keyframes drift{to{transform:translate3d(9vmax,7vmax,0) scale(1.12)}}
+.grain{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));transform-origin:0 50%;transform:scaleX(0)}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(6,8,15,.66);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font:700 17px/1 var(--disp);color:var(--ink);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+.logo .mk{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--a1),var(--a2));color:var(--btnink);box-shadow:0 6px 20px -6px rgba(var(--pc),.8)}
+.logo em{font-style:normal;color:var(--a1)}.logo small{font:500 13px Inter;color:var(--dim);margin-left:2px}
+.links{display:flex;gap:4px;margin-left:auto}
+.links a{color:var(--mute);text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 12px;border-radius:999px;transition:color .2s,background .2s}
+.links a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.nav .btn{--h:40px;font-size:14px;padding:0 16px}
+.menu{display:none;margin-left:auto;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);width:42px;height:42px;border-radius:12px;cursor:pointer}
+/* buttons */
+.btn{--h:52px;position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:var(--h);padding:0 24px;border-radius:999px;font-weight:650;font-size:16px;text-decoration:none;color:var(--btnink);background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 12px 34px -12px rgba(var(--pc),.85),inset 0 1px 0 rgba(255,255,255,.45);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;white-space:nowrap}
+.btn::before{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px rgba(var(--pc),.95),inset 0 1px 0 rgba(255,255,255,.45)}.btn:hover::before{left:135%}
+.btn svg{transition:transform .25s}.btn:hover svg{transform:translateX(3px)}
+.btn.ghost{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid rgba(255,255,255,.16);box-shadow:none;backdrop-filter:blur(8px)}
+.btn.ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(var(--pc),.6)}
+.btn.block{width:100%}
+/* hero */
+.hero{position:relative;padding:132px 0 30px;text-align:center;isolation:isolate;overflow-x:clip}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:-1;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 25%,transparent 75%)}
+.gridbg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000,transparent);mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000,transparent)}
+.crumbs{font-size:13px;color:var(--dim);margin-bottom:18px}.crumbs a{color:var(--mute);text-decoration:none}.crumbs a:hover{color:var(--ink)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 16px 6px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:13.5px;color:var(--mute);backdrop-filter:blur(8px)}
+.eyebrow b{color:var(--ink);font-weight:600;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--a1);box-shadow:0 0 0 0 rgba(var(--pc),.7);animation:ping 2s infinite;flex:none}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(var(--pc),0)}100%{box-shadow:0 0 0 0 rgba(var(--pc),0)}}
+h1{font-family:var(--disp);font-size:clamp(34px,5vw,64px);line-height:1.05;letter-spacing:-.035em;margin:24px auto 22px;max-width:1060px;font-weight:700;text-wrap:balance}
+.grad{background:linear-gradient(100deg,var(--a1),var(--a2) 45%,var(--a3) 70%,var(--a1));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:220% center}}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--mute);max-width:760px;margin:0 auto;text-wrap:pretty}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.note{font-size:14px;color:var(--dim);margin:16px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:26px}
+.chips span{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--mute)}
+.chips svg{color:var(--a1);width:14px;height:14px}
+.intro>*{animation:up .9s both cubic-bezier(.2,.7,.2,1)}
+.intro>*:nth-child(2){animation-delay:.08s}.intro>*:nth-child(3){animation-delay:.16s}.intro>*:nth-child(4){animation-delay:.24s}.intro>*:nth-child(5){animation-delay:.32s}.intro>*:nth-child(6){animation-delay:.4s}.intro>*:nth-child(7){animation-delay:.48s}
+@keyframes up{from{opacity:0;transform:translateY(22px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* stage */
+.stage{position:relative;max-width:1120px;margin:64px auto 0;border-radius:24px;padding:1px;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.03) 60%);box-shadow:0 50px 140px -40px rgba(var(--pc),.55),0 30px 60px -30px rgba(0,0,0,.8);transform:perspective(1800px) rotateX(var(--tilt,0deg)) scale(var(--sc,1));transform-origin:50% 0;animation:fadein 1.2s .45s both;text-align:left}
+.stage::after{content:"";position:absolute;left:10%;right:10%;bottom:-60px;height:120px;background:radial-gradient(ellipse at center,rgba(var(--pc),.35),transparent 70%);filter:blur(20px);z-index:-1}
+@keyframes fadein{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:none}}
+.stage-in>*,.stage-in>*>*{min-width:0}
+.stage-in{border-radius:23px;background:rgba(9,12,22,.94);overflow:hidden}
+.wbar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);font:500 12.5px/1.3 var(--mono);color:var(--dim)}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.wbar .live{margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:var(--a1);white-space:nowrap}
+.sfoot{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;align-items:center;padding:14px 18px;border-top:1px solid var(--line);font:500 13px var(--mono);color:var(--mute)}
+.sfoot b{color:var(--ink)}
+.cap{text-align:center;font-size:13px;color:var(--dim);margin-top:18px}
+/* sections */
+.glow::before{content:"";position:absolute;inset:10% 0 auto;height:70%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(var(--pc),.10),transparent 70%)}
+.glow2::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 40% 50% at 85% 30%,rgba(var(--pc2),.09),transparent 70%),radial-gradient(ellipse 40% 50% at 10% 80%,rgba(var(--pc3),.07),transparent 70%)}
+section{position:relative;padding:110px 0}
+.sh{max-width:780px;margin:0 auto 54px;text-align:center}
+.kicker{display:inline-block;font:600 12.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--a1)}
+h2{font-family:var(--disp);font-size:clamp(29px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;margin:16px 0 16px;font-weight:700;text-wrap:balance}
+.sh p{color:var(--mute);font-size:18px;margin:0;text-wrap:pretty}
+h3{font-family:var(--disp);font-size:20px;letter-spacing:-.01em;margin:0 0 8px;font-weight:600}
+.divider{height:1px;max-width:1180px;margin:0 auto;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent)}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s,background .3s;transition-delay:calc(var(--d,0)*90ms)}
+.js .rv.in{opacity:1;transform:none}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1120px;margin:70px auto 0}
+.stat{padding:22px 22px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));text-align:left}
+.stat b{display:block;font:700 clamp(30px,3.4vw,44px)/1 var(--disp);letter-spacing:-.03em;background:linear-gradient(120deg,var(--ink),var(--a1));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stat>span{display:block;margin-top:10px;color:var(--mute);font-size:14px;line-height:1.45}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{position:relative;overflow:hidden;padding:28px;border-radius:var(--r);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,-30%),rgba(var(--pc),.16),transparent 50%);opacity:0;transition:opacity .35s}
+.card:hover{transform:translateY(-5px);border-color:rgba(var(--pc),.4);box-shadow:0 24px 60px -24px rgba(var(--pc),.45)}
+.js .card.rv.in:hover{transform:translateY(-5px)}
+.card:hover::after{opacity:1}
+.card p{margin:0;color:var(--mute);font-size:15.5px}
+.ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;color:var(--a1);background:rgba(var(--pc),.1);border:1px solid rgba(var(--pc),.25)}
+.step .n{font:700 54px/1 var(--disp);letter-spacing:-.04em;background:linear-gradient(180deg,rgba(var(--pc),.9),rgba(var(--pc),.05));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+.checks{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.checks li{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#d6dbe8;transition:border-color .3s,background .3s}
+.checks li:hover{border-color:rgba(var(--pc),.35);background:rgba(var(--pc),.05)}
+.checks li svg{flex:none;margin-top:3px;color:var(--a1)}
+/* table */
+.tbl{border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03);overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{text-align:left;padding:15px 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+th{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.03)}
+td{color:#d6dbe8}td code{font-family:var(--mono);color:var(--ink);white-space:nowrap}
+tr.bad td:first-child{box-shadow:inset 3px 0 0 var(--warn)}
+tbody tr{transition:background .25s}tbody tr:hover{background:rgba(251,191,36,.06)}
+.tag{display:inline-block;font:600 11.5px var(--mono);padding:3px 9px;border-radius:999px;background:rgba(251,191,36,.14);color:#fcd34d;margin-right:8px;white-space:nowrap}
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.panel{padding:30px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015))}
+.panel p{color:var(--mute);margin:0 0 10px}.panel p b{color:var(--ink)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pills span{font:500 13px var(--mono);padding:6px 11px;border-radius:10px;background:rgba(var(--pc),.08);border:1px solid rgba(var(--pc),.2);color:var(--ink)}
+/* pricing */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:stretch}
+.plan{display:flex;flex-direction:column;padding:30px 26px}
+.plan .price{font:700 46px/1 var(--disp);letter-spacing:-.04em;margin:14px 0 14px;font-variant-numeric:tabular-nums}
+.plan .price small{font:500 15px Inter;color:var(--dim);letter-spacing:0;margin-left:4px}
+.plan p{flex:1;margin-bottom:24px}
+.plan.featured{background:linear-gradient(180deg,rgba(var(--pc),.14),rgba(255,255,255,.02));border-color:transparent;box-shadow:0 30px 80px -30px rgba(var(--pc),.6)}
+.plan.featured::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--ang),var(--a1),var(--a2),var(--a3),var(--a1));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 6s linear infinite;pointer-events:none}
+@keyframes spin{to{--ang:360deg}}
+.badge{position:absolute;top:18px;right:18px;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;color:var(--btnink);background:linear-gradient(135deg,var(--a1),var(--a2))}
+.fine{text-align:center;color:var(--dim);font-size:14px;margin-top:22px}
+/* faq */
+.faq{max-width:860px;margin:0 auto}
+.faq details{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03);margin-bottom:12px;transition:border-color .3s,background .3s}
+.faq details[open]{border-color:rgba(var(--pc),.4);background:rgba(var(--pc),.05)}
+.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font:600 17px/1.4 var(--disp);cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq .pm{flex:none;color:var(--a1);transition:transform .35s}.faq details[open] .pm{transform:rotate(135deg)}
+.faq details p{margin:0;padding:0 24px 22px;color:var(--mute)}
+.faq details[open] p{animation:up .45s both}
+/* about */
+.about{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;max-width:920px;margin:0 auto}
+.avatar{width:92px;height:92px;border-radius:26px;display:grid;place-items:center;font:700 32px var(--disp);color:var(--btnink);background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 20px 50px -18px rgba(var(--pc),.8)}
+.about p{color:var(--mute);margin:0 0 12px;font-size:17px}.about p b{color:var(--ink)}
+.about .lnk{display:flex;gap:16px;flex-wrap:wrap}.about .lnk a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-bottom:1px solid rgba(var(--pc),.5)}
+/* final */
+.final{position:relative;overflow:hidden;text-align:center;padding:76px 28px;border-radius:30px;border:1px solid rgba(255,255,255,.12);background:radial-gradient(ellipse 70% 90% at 50% 0%,rgba(var(--pc),.28),transparent 70%),radial-gradient(ellipse 60% 80% at 100% 100%,rgba(var(--pc2),.22),transparent 70%),rgba(255,255,255,.03)}
+.final p{color:var(--mute);font-size:18px;max-width:640px;margin:0 auto}
+footer{padding:44px 0 60px;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
+footer a{color:var(--mute);text-decoration:none}footer a:hover{color:var(--ink)}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+/* mobile bar */
+.mbar{display:none}
+@media (max-width:860px){
+ .links,.nav .wrap>.btn{display:none}.menu{display:grid;place-items:center}
+ .nav.open .links{display:flex;flex-direction:column;position:absolute;top:70px;left:12px;right:12px;padding:10px;border-radius:18px;background:rgba(8,11,20,.96);border:1px solid var(--line);backdrop-filter:blur(16px)}
+ .nav.open .links a{padding:12px 14px;font-size:16px}
+ .nav{background:rgba(6,8,15,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .split{grid-template-columns:1fr}
+ section{padding:76px 0}
+ .hero{padding-top:104px}
+ .wbar .ttl{display:none}
+ .eyebrow{font-size:12.5px;line-height:1.35;text-align:left;max-width:100%}
+ .mbar{display:flex;position:fixed;left:10px;right:10px;bottom:10px;z-index:55;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:18px;background:rgba(8,11,20,.88);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 20px 50px -10px rgba(0,0,0,.8);transform:translateY(130%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+ .mbar.show{transform:none}
+ .mbar span{font-size:13px;color:var(--mute);line-height:1.3;flex:1}.mbar span b{display:block;color:var(--ink);font-size:14px}
+ .mbar .btn{--h:44px;padding:0 16px;font-size:14.5px}
+ body{padding-bottom:84px}
+ .about{grid-template-columns:1fr;text-align:left}
+}
+@media (max-width:600px){
+ .tbl table{min-width:0}.tbl thead{display:none}.tbl tr{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.06)}.tbl td{padding:0;border:0}.tbl td:last-child{grid-column:1/-1;margin-top:6px}tr.bad td:first-child{box-shadow:none}tr.bad{box-shadow:inset 3px 0 0 var(--warn)}
+ .sfoot{font-size:12px;gap:6px 12px}
+}
+@media (max-width:520px){
+ .wrap{padding:0 18px}.cta .btn{width:100%}.checks{grid-template-columns:1fr}.stat{padding:18px}.card{padding:22px}
+ .logo small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .js .rv{opacity:1;transform:none}
+ .stage{transform:none}
+}
+
+.pipe{display:flex;align-items:center;padding:34px 28px 8px}
+.node{position:relative;flex:0 0 150px;text-align:center;padding:16px 10px 14px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}
+.node .ni{width:44px;height:44px;margin:0 auto 10px;border-radius:13px;display:grid;place-items:center;color:var(--a1);background:rgba(var(--pc),.1);border:1px solid rgba(var(--pc),.28)}
+.node.k .ni{color:var(--a3);background:rgba(var(--pc3),.1);border-color:rgba(var(--pc3),.3)}
+.node b{display:block;font:600 15px/1.2 var(--disp)}.node small{display:block;margin-top:4px;font:500 11px/1.35 var(--mono);color:var(--dim)}
+.brokers{display:flex;gap:5px;justify-content:center;margin:0 auto 10px;height:44px;align-items:flex-end}
+.brokers span{width:12px;border-radius:4px;background:linear-gradient(180deg,var(--a3),rgba(var(--pc3),.3));animation:bk 1.6s ease-in-out infinite}
+.brokers span:nth-child(1){height:30px}.brokers span:nth-child(2){height:40px;animation-delay:.2s}.brokers span:nth-child(3){height:34px;animation-delay:.4s}
+@keyframes bk{50%{filter:brightness(1.6);transform:scaleY(.9)}}
+.pop{position:absolute;left:50%;top:-12px;transform:translateX(-50%);font:600 10.5px var(--mono);padding:3px 9px;border-radius:999px;white-space:nowrap;opacity:0;animation:pop 2.4s infinite}
+.pop.ack{background:rgba(52,211,153,.16);color:#6ee7b7;border:1px solid rgba(52,211,153,.35)}
+.pop.cm{background:rgba(var(--pc),.16);color:#fdba74;border:1px solid rgba(var(--pc),.4);animation-delay:.35s}
+@keyframes pop{0%,55%{opacity:0;transform:translate(-50%,6px)}62%,88%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+.link{position:relative;flex:1;min-width:24px;height:2px;background:linear-gradient(90deg,rgba(var(--pc),.25),rgba(var(--pc),.6))}
+.link i{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:3px;background:var(--a2);box-shadow:0 0 14px var(--a1);animation:flow 2.4s linear infinite;animation-delay:calc(var(--i)*-.8s);opacity:0}
+@keyframes flow{0%{left:0;opacity:0}12%,88%{opacity:1}100%{left:calc(100% - 10px);opacity:0}}
+.lane2{display:flex;align-items:center;gap:0;margin:0 28px 26px;padding-left:calc(2*150px + 2*((100% - 5*150px)/4) + 75px - 1px)}
+.lane2 .vl{width:2px;height:34px;background:linear-gradient(180deg,rgba(var(--pc3),.6),rgba(var(--pc3),.2));position:relative;align-self:flex-start}
+.lane2 .wrapl{display:flex;flex-direction:column}
+.lane2 .row{display:flex;align-items:center}
+.lane2 .hl{width:60px;height:2px;background:rgba(var(--pc3),.4);position:relative}
+.lane2 .hl i,.lane2 .vl i{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--a3);box-shadow:0 0 12px var(--a3)}
+.lane2 .vl i{left:-3px;animation:fv 2.4s linear infinite}.lane2 .hl i{top:-3px;animation:fh 2.4s linear infinite;animation-delay:.9s;opacity:0}
+@keyframes fv{0%{top:0;opacity:0}15%,85%{opacity:1}100%{top:calc(100% - 8px);opacity:0}}
+@keyframes fh{0%{left:0;opacity:0}15%,85%{opacity:1}100%{left:calc(100% - 8px);opacity:0}}
+.wh{padding:9px 14px;border-radius:12px;border:1px dashed rgba(var(--pc3),.45);background:rgba(var(--pc3),.06);font:500 12px var(--mono);color:var(--mute)}.wh b{color:var(--ink);font-family:var(--disp);font-size:13.5px;margin-right:6px}
+.kgrid>*{min-width:0}.kgrid{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;padding:0 28px 28px}
+.term{border-radius:14px;border:1px solid var(--line);background:#06080f;overflow:hidden}
+.term .th{display:flex;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid var(--line);font:500 11.5px var(--mono);color:var(--dim)}
+.term pre{margin:0;padding:16px 16px 18px;font:500 12.5px/1.75 var(--mono);color:#cbd5e1;overflow:hidden;white-space:pre}
+.term .l{display:block;animation:tl 12s infinite both;animation-delay:calc(var(--i)*.45s)}
+@keyframes tl{0%{opacity:0;transform:translateX(-6px)}3%,90%{opacity:1;transform:none}96%,100%{opacity:0}}
+.kw{color:#c084fc}.fn{color:#7dd3fc}.st{color:#86efac}.cm{color:#64748b;font-style:italic}.hl2{background:rgba(var(--pc),.14);border-radius:4px;box-shadow:inset 2px 0 0 var(--a1)}
+.caret{display:inline-block;width:8px;height:15px;background:var(--a1);vertical-align:-2px;animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+.recon{border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.025);padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.recon h4{margin:0;font:600 14px var(--disp);display:flex;justify-content:space-between;gap:8px}.recon h4 span{font:500 11px var(--mono);color:var(--dim)}
+.bar{font:500 11.5px var(--mono);color:var(--mute)}.bar .tr{height:10px;border-radius:6px;background:rgba(255,255,255,.06);margin-top:6px;overflow:hidden}
+.bar .tr i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--a1),var(--a2));transform-origin:0 50%;animation:fill 6s cubic-bezier(.3,.7,.2,1) infinite}
+.bar.w .tr i{background:linear-gradient(90deg,var(--a3),#818cf8);animation-delay:.25s}
+@keyframes fill{0%{transform:scaleX(0)}45%,90%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:.4}}
+.ok2{display:flex;flex-wrap:wrap;gap:8px}.ok2 span{font:600 11.5px var(--mono);padding:5px 10px;border-radius:999px;background:rgba(52,211,153,.12);color:#6ee7b7;border:1px solid rgba(52,211,153,.25)}
+.checks li:last-child:nth-child(3n+1){grid-column:1/-1}
+.chs{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+.ch{padding:22px 22px 20px}.ch .no{font:700 13px var(--mono);color:var(--a1);letter-spacing:.06em}.ch h3{font-size:17.5px;margin:8px 0 6px;line-height:1.3}.ch p{font-size:14px}
+.bookwrap{display:grid;place-items:center;perspective:1200px;padding:20px}
+.book{position:relative;width:230px;height:316px;transform-style:preserve-3d;transform:rotateY(-26deg) rotateX(6deg);animation:float 7s ease-in-out infinite;transition:transform .6s}
+.bookwrap:hover .book{transform:rotateY(-8deg) rotateX(2deg)}
+@keyframes float{50%{translate:0 -12px}}
+.book .cv,.book .bk{position:absolute;inset:0;border-radius:4px 12px 12px 4px}
+.book .cv{transform:translateZ(15px);overflow:hidden;padding:24px 20px;display:flex;flex-direction:column;background:radial-gradient(circle at 80% 10%,rgba(var(--pc),.55),transparent 55%),radial-gradient(circle at 10% 100%,rgba(var(--pc3),.35),transparent 55%),#0b0f1c;border:1px solid rgba(255,255,255,.14);box-shadow:inset 6px 0 10px -4px rgba(0,0,0,.6)}
+.book .bk{transform:translateZ(-15px);background:#070a13;box-shadow:30px 40px 60px -20px rgba(0,0,0,.9),0 0 80px -10px rgba(var(--pc),.45)}
+.book .pg{position:absolute;top:4px;bottom:4px;right:0;width:30px;transform-origin:right center;transform:translateZ(15px) rotateY(-90deg);background:repeating-linear-gradient(90deg,#f3efe6 0 1px,#d9d3c4 1px 2px)}
+.book .cv small{font:600 10px var(--mono);letter-spacing:.16em;color:var(--a2)}
+.book .cv b{font:700 34px/1 var(--disp);letter-spacing:-.03em;margin-top:14px}
+.book .cv em{font-style:normal;font:500 12px/1.4 Inter;color:var(--mute);margin-top:10px}
+.book .cv .au{margin-top:auto;font:600 12px var(--mono);color:var(--ink)}
+.book svg{margin-top:18px}
+.prod{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:center}
+.prod p{color:var(--mute);font-size:17px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+@media (max-width:1020px){.lane2{padding-left:28px}}
+@media (max-width:860px){
+ .pipe{flex-direction:column;padding:22px 18px 6px}.node{flex:none;width:100%;display:grid;grid-template-columns:44px 1fr;gap:4px 14px;text-align:left;align-items:center}
+ .node .ni,.brokers{margin:0;grid-row:span 2}.node small{margin-top:0}
+ .link{flex:none;width:2px;height:30px;min-width:0;background:linear-gradient(180deg,rgba(var(--pc),.25),rgba(var(--pc),.6))}
+ .link i{left:-4px;top:0;animation-name:flowy}
+ @keyframes flowy{0%{top:0;opacity:0}12%,88%{opacity:1}100%{top:calc(100% - 10px);opacity:0}}
+ .pop{left:auto;right:10px;top:-10px;transform:none}
+ .lane2{margin:10px 18px 20px;padding-left:0}.lane2 .vl{display:none}.lane2 .hl{width:24px}
+ .kgrid{grid-template-columns:1fr;padding:0 16px 18px}.term pre{font-size:11px;overflow-x:auto}
+ .prod{grid-template-columns:1fr}.nums{grid-template-columns:1fr 1fr 1fr}
+ .wbar .ttl{display:none}
+}
+@media (max-width:520px){.nums .stat b{font-size:24px}.nums .stat{padding:14px}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "Zero-Loss CDC: Production Playbook for MySQL to Kafka to ClickHouse", "description": "Build a CDC pipeline that does not lose rows: MySQL binlog, Debezium, Kafka KRaft, Python consumers, ClickHouse, fail-closed offsets, reconciliation, backfills.", "url": "https://muhammaddanish122.github.io/kafka-cdc-playbook/", "image": "https://muhammaddanish122.github.io/kafka-cdc-playbook/og.png", "brand": {"@type": "Brand", "name": "Danish Rajpoot"}, "offers": [{"@type": "Offer", "name": "Playbook", "price": "49", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://muhammaddanish122.github.io/kafka-cdc-playbook/"}, {"@type": "Offer", "name": "Playbook + lab", "price": "79", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://muhammaddanish122.github.io/kafka-cdc-playbook/"}, {"@type": "Offer", "name": "Team", "price": "149", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://muhammaddanish122.github.io/kafka-cdc-playbook/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it cover PostgreSQL or SQL Server?", "acceptedAnswer": {"@type": "Answer", "text": "The examples use MySQL. The consumer, reconciliation and backfill chapters apply to any Debezium source, and the notes call out Postgres differences."}}, {"@type": "Question", "name": "Is this for Kafka Connect sinks or custom consumers?", "acceptedAnswer": {"@type": "Answer", "text": "Custom Python consumers. Chapter 6 explains when the ClickHouse Kafka engine or a Connect sink is good enough and when it is not."}}, {"@type": "Question", "name": "Which versions does it use?", "acceptedAnswer": {"@type": "Answer", "text": "Recent Debezium 2.x/3.x, Kafka 3.x/4.x in KRaft mode, and current ClickHouse. Version-specific settings are marked."}}, {"@type": "Question", "name": "Is any company code included?", "acceptedAnswer": {"@type": "Answer", "text": "No. Every example is written from scratch for the book with fictional tables."}}, {"@type": "Question", "name": "What format do I get?", "acceptedAnswer": {"@type": "Answer", "text": "PDF and EPUB. The lab tier includes a Git repository with the Docker Compose setup and SQL."}}, {"@type": "Question", "name": "Can I get a refund?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, within 14 days, no questions asked."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Danish Rajpoot", "jobTitle": "Principal Data Engineer", "url": "https://muhammaddanish122.github.io/", "sameAs": ["https://github.com/MuhammadDanish122", "https://www.linkedin.com/in/danish-r-37bb85141/"]}</script>
+</head><body>
+<script>document.documentElement.classList.add("js")</script>
+<a class="skip" href="#main">Skip to content</a><div class="progress" aria-hidden="true"></div><div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div><div class="grain" aria-hidden="true"></div><header class="nav"><div class="wrap"><a class="logo" href="https://muhammaddanish122.github.io/" aria-label="Danish Rajpoot home"><span class="mk" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l3-7 4 14 3-7h2"/></svg></span><span>Zero-Loss <em>CDC</em></span></a><nav class="links" id="navlinks" aria-label="Page sections"><a href="#learn">What you'll learn</a><a href="#contents">Contents</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Zero-Loss%20CDC%20playbook%20-%20early%20access">Early access <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><button class="menu" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
+<main id="main">
+<div class="hero"><canvas id="fx" aria-hidden="true"></canvas><div class="gridbg" aria-hidden="true"></div><div class="wrap">
+<div class="intro">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="https://muhammaddanish122.github.io/">Danish Rajpoot</a> / Kafka CDC playbook</nav>
+<div><span class="eyebrow"><span class="dot"></span><b>Early access</b> launch price $39 for the first two weeks</span></div>
+<h1><span class="grad">Zero-Loss CDC</span>: a production playbook for MySQL to Debezium to Kafka to ClickHouse</h1>
+<p class="lead">Most CDC tutorials stop when the first event shows up in a topic. This playbook starts there: how to make sure every row change reaches the warehouse, how to prove it did, and what to do on the day it doesn't.</p>
+<div class="cta"><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Zero-Loss%20CDC%20playbook%20-%20early%20access">Get early access ($39) <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="#pricing">See pricing</a></div>
+<p class="note">Launch price $39 for the first two weeks, then $49. Email me to get the release link.</p>
+<div class="chips"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>PDF + EPUB</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Docker Compose lab</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No employer code</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>14-day refund</span></div>
+</div>
+<div class="stage" role="img" aria-label="Animated diagram of the zero-loss CDC pipeline: MySQL binlog to Debezium to a 3-node Kafka KRaft cluster to a fail-closed Python consumer to ClickHouse, with offsets committed only after ClickHouse acknowledges the write, a separate webhook consumer group, and id-level reconciliation">
+<div class="stage-in"><div class="wbar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">zero-loss-cdc · reference architecture (fictional shop schema)</span><span class="live"><span class="dot"></span>streaming</span></div>
+<div aria-hidden="true">
+<div class="pipe">
+<div class="node"><div class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></svg></div><b>MySQL</b><small>binlog · ROW · GTID</small></div><div class="link"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div>
+<div class="node"><div class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/></svg></div><b>Debezium</b><small>snapshot + stream</small></div><div class="link"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div>
+<div class="node k"><div class="brokers"><span></span><span></span><span></span></div><b>Kafka</b><small>3 nodes · KRaft · acks=all</small></div><div class="link"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div>
+<div class="node"><span class="pop cm">offset committed</span><div class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></div><b>Python consumer</b><small>fail-closed</small></div><div class="link"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div>
+<div class="node"><span class="pop ack">✓ write confirmed</span><div class="ni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4v16M9 4v16M13 4v16M17 4v16M21 10v4"/></svg></div><b>ClickHouse</b><small>ReplacingMergeTree</small></div>
+</div>
+<div class="lane2"><div class="wrapl"><div class="vl"><i></i></div><div class="row"><div class="hl"><i></i></div><div class="wh"><b>Webhook consumer group</b>own offsets · never slows the warehouse</div></div></div></div>
+<div class="kgrid">
+<div class="term"><div class="th"><span class="dots"><i></i><i></i><i></i></span>consumer.py</div><pre><span class="l" style="--i:0"><span class="cm"># fail-closed: the offset moves only after ClickHouse has the rows</span></span><span class="l" style="--i:1">consumer = Consumer({<span class="st">"group.id"</span>: <span class="st">"warehouse"</span>, <span class="st">"enable.auto.commit"</span>: <span class="kw">False</span>})</span><span class="l" style="--i:2"><span class="kw">for</span> batch <span class="kw">in</span> <span class="fn">poll_batches</span>(consumer):</span><span class="l" style="--i:3">    rows = <span class="fn">decode</span>(batch)</span><span class="l hl2" style="--i:4">    ch.<span class="fn">insert</span>(<span class="st">"shop.orders_cdc"</span>, rows)   <span class="cm"># wait for confirm</span></span><span class="l hl2" style="--i:5">    consumer.<span class="fn">commit</span>(batch)                <span class="cm"># then commit</span></span><span class="l" style="--i:6"><span class="caret"></span></span></pre></div>
+<div class="recon"><h4>Id-level reconciliation <span>shop.orders</span></h4>
+<div class="bar"><span>source · MySQL ids</span><div class="tr"><i></i></div></div>
+<div class="bar w"><span>warehouse · ClickHouse ids</span><div class="tr"><i></i></div></div>
+<div class="ok2"><span>✓ missing ids: none</span><span>✓ drift alert: off</span></div>
+<small style="color:var(--dim);font-size:12px">Counts are not enough. Chapter 8 checks every id range.</small></div>
+</div></div>
+</div></div>
+<p class="cap">Illustration of the method in the book. All examples use a fictional shop schema.</p>
+<div class="stats">
+<div class="stat rv" style="--d:0"><b><span data-to="12">12</span></b><span>chapters, each ending with a checklist</span></div>
+<div class="stat rv" style="--d:1"><b><span data-to="200">200</span>+</b><span>MySQL tables on the CDC platform I run</span></div>
+<div class="stat rv" style="--d:2"><b><span data-to="28000">28,000</span></b><span>rows a minute at peak on that platform</span></div>
+<div class="stat rv" style="--d:3"><b><span data-to="14">14</span>-day</b><span>refund if it is not useful to you</span></div>
+</div>
+</div></div>
+
+<section id="learn" class="glow2" aria-labelledby="learn-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">Outcomes</span><h2 id="learn-h">What you will be able to do</h2><p>Every row change reaches the warehouse, and you can prove it.</p></div>
+<ul class="checks"><li class="rv" style="--d:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Configure MySQL binlog and Debezium so you capture every insert, update and delete, including during snapshots</span></li><li class="rv" style="--d:1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Run a 3-node Kafka cluster in KRaft mode without ZooKeeper</span></li><li class="rv" style="--d:2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Write Python consumers that commit offsets only after ClickHouse confirms the write (fail-closed)</span></li><li class="rv" style="--d:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Pick the right ClickHouse table engine for upserts and deletes from CDC</span></li><li class="rv" style="--d:1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Reconcile source and warehouse down to the row id, and alert on drift</span></li><li class="rv" style="--d:2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Backfill a table or a time window without double counting</span></li><li class="rv" style="--d:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Run a separate webhook consumer group off the same topics without slowing the warehouse</span></li></ul>
+</div></section>
+<div class="divider"></div>
+
+<section id="contents" aria-labelledby="toc-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">12 chapters</span><h2 id="toc-h">Table of contents</h2><p>Plus appendices: full config reference, reconciliation SQL and a glossary.</p></div>
+<ol class="chs" style="list-style:none;padding:0;margin:0"><li class="card ch rv" style="--d:0"><span class="no">CHAPTER 01</span><h3>Why CDC pipelines lose rows (and why nobody notices)</h3><p>Where rows go missing and why dashboards hide it.</p></li><li class="card ch rv" style="--d:1"><span class="no">CHAPTER 02</span><h3>Reference architecture and the zero-loss contract</h3><p>The five hops, what each one promises, and the one rule: nothing is acknowledged until the next hop has it.</p></li><li class="card ch rv" style="--d:2"><span class="no">CHAPTER 03</span><h3>MySQL binlog setup that holds up in production</h3><p>ROW format, full row image, GTIDs, binlog retention vs. worst-case outage, grants, replicas as source.</p></li><li class="card ch rv" style="--d:0"><span class="no">CHAPTER 04</span><h3>Debezium connector configuration, snapshots and schema history</h3><p>Snapshot modes, incremental snapshots via a signal table, schema history protection, heartbeats, tombstones.</p></li><li class="card ch rv" style="--d:1"><span class="no">CHAPTER 05</span><h3>Kafka in KRaft mode: a 3-node cluster, topics, partitions, retention</h3><p>Controller quorum, replication factor 3, min.insync.replicas 2, acks=all, retention sized for your longest outage.</p></li><li class="card ch rv" style="--d:2"><span class="no">CHAPTER 06</span><h3>Fail-closed Python consumers: commit only after the warehouse confirms</h3><p>Auto-commit off, batch, insert, confirm, commit. Idempotent writes, poison messages, rebalances.</p></li><li class="card ch rv" style="--d:0"><span class="no">CHAPTER 07</span><h3>ClickHouse modelling for CDC: ReplacingMergeTree, versions, deletes</h3><p>Version columns, delete markers, FINAL vs. argMax views, partitioning, async insert trade-offs.</p></li><li class="card ch rv" style="--d:1"><span class="no">CHAPTER 08</span><h3>Id-level audit and reconciliation</h3><p>Per-table id-range checksums, missing-id detection, hourly and daily jobs, drift alerts.</p></li><li class="card ch rv" style="--d:2"><span class="no">CHAPTER 09</span><h3>Backfills and replays without double counting</h3><p>Re-snapshot one table, replay a time window from Kafka, version-based dedupe, cutover checklist.</p></li><li class="card ch rv" style="--d:0"><span class="no">CHAPTER 10</span><h3>A second consumer group for webhooks and side effects</h3><p>Separate group ids and lag budgets, at-least-once side effects with idempotency keys.</p></li><li class="card ch rv" style="--d:1"><span class="no">CHAPTER 11</span><h3>Monitoring, alerting and the on-call runbook</h3><p>Connector state, consumer lag, binlog position vs. retention, reconciliation drift, and what to do for each.</p></li><li class="card ch rv" style="--d:2"><span class="no">CHAPTER 12</span><h3>Schema changes, upgrades and the go-live checklist</h3><p>DDL on the source, adding columns, renames, Kafka and Debezium upgrades, and the go-live list.</p></li></ol>
+</div></section>
+
+<section aria-labelledby="for-h" class="glow2"><div class="wrap"><div class="split">
+<div class="panel rv"><span class="kicker">Audience</span><h2 id="for-h" style="font-size:clamp(26px,3vw,38px)">Who this is for</h2><p>Data engineers and backend engineers who have to move MySQL data into ClickHouse (or a similar warehouse) in near real time and cannot afford silent gaps. You should be comfortable with SQL, Python and Docker. You do not need to be a Kafka expert.</p>
+<div class="pills"><span>SQL</span><span>Python</span><span>Docker</span><span>Debezium 2.x/3.x</span><span>Kafka 3.x/4.x KRaft</span><span>ClickHouse</span></div></div>
+<div class="panel rv" style="--d:1"><span class="kicker">Format</span><h2 style="font-size:clamp(26px,3vw,38px)">What you get</h2><p><b>PDF and EPUB</b>, 12 chapters, all config and code snippets, and a checklist at the end of every chapter.</p><p><b>Lab tier:</b> a Git repository with the Docker Compose setup (MySQL, Debezium, 3-node KRaft Kafka, ClickHouse) and the reconciliation SQL.</p><p><b>Free updates</b> for every 2027 edition.</p></div>
+</div></div></section>
+
+<section aria-labelledby="prod-h"><div class="wrap"><div class="prod">
+<div class="rv"><div class="bookwrap" aria-hidden="true"><div class="book"><div class="bk"></div><div class="pg"></div><div class="cv"><small>PRODUCTION PLAYBOOK</small><b>Zero-Loss<br>CDC</b><em>MySQL → Debezium → Kafka → ClickHouse</em>
+<svg width="190" height="60" viewBox="0 0 190 60"><g fill="none" stroke-width="2"><path d="M8 30h50M72 30h46M132 30h50" stroke="rgba(251,146,60,.7)" stroke-dasharray="4 4"/></g><g><circle cx="8" cy="30" r="6" fill="#fb923c"/><rect x="58" y="20" width="14" height="20" rx="3" fill="#22d3ee"/><rect x="118" y="20" width="14" height="20" rx="3" fill="#facc15"/><circle cx="182" cy="30" r="6" fill="#fb923c"/></g></svg>
+<span class="au">DANISH RAJPOOT</span></div></div></div></div>
+<div class="rv" style="--d:1"><span class="kicker">The author</span><h2 id="prod-h">Written from production, not from the docs</h2>
+<p>I'm Danish Rajpoot, a Principal Data Engineer with 8+ years in data platforms. I run a CDC platform replicating 200+ MySQL tables into ClickHouse at peaks above 28,000 rows a minute. The playbook is the method behind it, rewritten from scratch with generic examples. No employer code, configs or internal documents are included.</p>
+<div class="nums"><div class="stat"><b><span data-to="8">8</span>+</b><span>years in data platforms</span></div><div class="stat"><b><span data-to="200">200</span>+</b><span>MySQL tables replicated</span></div><div class="stat"><b><span data-to="28">28</span>k</b><span>rows a minute at peak</span></div></div>
+<p style="margin-top:18px"><a href="https://www.linkedin.com/in/danish-r-37bb85141/" style="color:var(--ink);font-weight:600">LinkedIn</a> · <a href="https://github.com/MuhammadDanish122" style="color:var(--ink);font-weight:600">GitHub</a></p></div>
+</div></div></section>
+
+<section id="pricing" class="glow" aria-labelledby="pricing-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">Pricing</span><h2 id="pricing-h">Playbook pricing</h2><p>One-time payment. Pick the depth you need.</p></div>
+<div class="plans"><div class="card plan rv featured" style="--d:0"><span class="badge">Launch price $39</span><h3>Playbook</h3><div class="price">$<span data-to="49">49</span><small></small></div><p>PDF + EPUB, 12 chapters, all config and code snippets, checklists. Launch price $39.</p><a class="btn block" href="mailto:daneshrana45@gmail.com?subject=Zero-Loss%20CDC%20playbook%20-%20early%20access" aria-label="Get early access: Playbook">Get early access ($39) <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div><div class="card plan rv" style="--d:1"><h3>Playbook + lab</h3><div class="price">$<span data-to="79">79</span><small></small></div><p>Adds a Docker Compose lab (MySQL, Debezium, 3-node KRaft Kafka, ClickHouse) and the reconciliation SQL pack.</p><a class="btn ghost block" href="mailto:daneshrana45@gmail.com?subject=Zero-Loss%20CDC%20-%20Playbook%20%2B%20lab" aria-label="Get early access: Playbook + lab">Get early access <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div><div class="card plan rv" style="--d:2"><h3>Team</h3><div class="price">$<span data-to="149">149</span><small></small></div><p>Up to 10 readers, the lab, and a 45-minute call to review your pipeline design.</p><a class="btn ghost block" href="mailto:daneshrana45@gmail.com?subject=Zero-Loss%20CDC%20-%20Team" aria-label="Get early access: Team">Get early access <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+<p class="fine">Free updates for every 2027 edition. 14-day refund if it is not useful to you.</p>
+</div></section>
+
+<section id="faq" aria-labelledby="faq-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">FAQ</span><h2 id="faq-h">Kafka CDC playbook: questions</h2></div>
+<div class="faq"><details class="rv" style="--d:0"><summary>Does it cover PostgreSQL or SQL Server?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>The examples use MySQL. The consumer, reconciliation and backfill chapters apply to any Debezium source, and the notes call out Postgres differences.</p></details><details class="rv" style="--d:1"><summary>Is this for Kafka Connect sinks or custom consumers?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>Custom Python consumers. Chapter 6 explains when the ClickHouse Kafka engine or a Connect sink is good enough and when it is not.</p></details><details class="rv" style="--d:2"><summary>Which versions does it use?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>Recent Debezium 2.x/3.x, Kafka 3.x/4.x in KRaft mode, and current ClickHouse. Version-specific settings are marked.</p></details><details class="rv" style="--d:3"><summary>Is any company code included?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>No. Every example is written from scratch for the book with fictional tables.</p></details><details class="rv" style="--d:4"><summary>What format do I get?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>PDF and EPUB. The lab tier includes a Git repository with the Docker Compose setup and SQL.</p></details><details class="rv" style="--d:5"><summary>Can I get a refund?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>Yes, within 14 days, no questions asked.</p></details></div></div></section>
+
+<section aria-labelledby="final-h" style="padding-top:20px"><div class="wrap"><div class="final rv">
+<span class="kicker">Early access</span><h2 id="final-h">Stop guessing whether your pipeline dropped rows</h2>
+<p>Get the method, the checks and the runbook in one place.</p>
+<div class="cta"><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Zero-Loss%20CDC%20playbook%20-%20early%20access">Get early access ($39) <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></div></section>
+</main>
+<footer><div class="wrap"><div>Built by Danish Rajpoot, data engineer · <a href="mailto:daneshrana45@gmail.com">daneshrana45@gmail.com</a><br>I reply to every email personally, usually within one working day.</div><nav aria-label="Footer"><a href="https://muhammaddanish122.github.io/">Portfolio</a><a href="https://muhammaddanish122.github.io/pennyleak/">Pennyleak</a><a href="https://github.com/MuhammadDanish122">GitHub</a><a href="https://www.linkedin.com/in/danish-r-37bb85141/">LinkedIn</a></nav></div></footer>
+<div class="mbar" role="region" aria-label="Quick action"><span><b>Launch price $39</b>Then $49</span><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Zero-Loss%20CDC%20playbook%20-%20early%20access">Early access</a></div>
+<script>
+(()=>{const d=document,R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const nav=d.querySelector('.nav'),mbar=d.querySelector('.mbar'),hero=d.querySelector('.hero'),pr=d.querySelector('.progress'),st=d.querySelector('.stage');
+const onS=()=>{const y=scrollY;nav.classList.toggle('scrolled',y>12);
+ if(mbar)mbar.classList.toggle('show',y>(hero?hero.offsetHeight*.55:400)&&(innerHeight+y)<d.documentElement.scrollHeight-260);
+ const h=d.documentElement.scrollHeight-innerHeight;if(pr)pr.style.transform='scaleX('+(h>0?y/h:0)+')';
+ if(st&&!R){const r=st.getBoundingClientRect(),k=Math.max(0,Math.min(1,r.top/(innerHeight*.95)));st.style.setProperty('--tilt',(k*(innerWidth<860?8:14)).toFixed(2)+'deg');st.style.setProperty('--sc',(1-k*.05).toFixed(3))}};
+addEventListener('scroll',onS,{passive:true});addEventListener('resize',onS);onS();
+const mb=d.querySelector('.menu');if(mb){mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});d.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false')}))}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const t=e.target;t.classList.add('in');io.unobserve(t);setTimeout(()=>{t.style.transitionDelay='0s'},1100+(+getComputedStyle(t).getPropertyValue('--d')||0)*90)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+d.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const fmt=(n,k)=>n.toLocaleString('en-US',{minimumFractionDigits:k,maximumFractionDigits:k});
+const cs=d.querySelectorAll('[data-to]');
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.to,k=+(el.dataset.dec||0),t0=performance.now(),dur=1600;
+ const f=t=>{const p=Math.min(1,(t-t0)/dur);el.textContent=fmt(to*(1-Math.pow(1-p,4)),k);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.6});
+if(!R)cs.forEach(el=>{el.textContent='0';cio.observe(el)});
+d.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+const c=d.getElementById('fx');if(c&&c.getContext){const x=c.getContext('2d'),col=getComputedStyle(d.documentElement).getPropertyValue('--pc').trim()||'255,255,255';let w,h,pts=[],run=true,raf=0,dpr=Math.min(devicePixelRatio||1,2),mx=-999,my=-999;
+ const size=()=>{w=c.clientWidth;h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);const n=Math.min(110,Math.floor(w*h/14000));pts=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.7+.4}))};
+ const draw=()=>{x.clearRect(0,0,w,h);for(let i=0;i<pts.length;i++){const p=pts[i];if(!R){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;const ddx=p.x-mx,ddy=p.y-my,dm=ddx*ddx+ddy*ddy;if(dm<14000){p.x+=ddx*.012;p.y+=ddy*.012}}
+  x.beginPath();x.arc(p.x,p.y,p.r,0,6.2832);x.fillStyle='rgba('+col+',.75)';x.fill();
+  for(let j=i+1;j<pts.length;j++){const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,dd=dx*dx+dy*dy;if(dd<14000){x.strokeStyle='rgba('+col+','+(.18*(1-dd/14000)).toFixed(3)+')';x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}}
+  if(run&&!R)raf=requestAnimationFrame(draw)};
+ size();draw();addEventListener('resize',()=>{size();if(R)draw()});
+ hero.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+ new IntersectionObserver(([e])=>{const was=run;run=e.isIntersecting;if(run&&!was&&!R){cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)}}).observe(c);
+ d.addEventListener('visibilitychange',()=>{run=!d.hidden;if(run&&!R){cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)}})}
+})();
+</script>
+</body></html>

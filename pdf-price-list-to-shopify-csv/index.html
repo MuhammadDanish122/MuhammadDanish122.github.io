@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Supplier PDF Price List to Shopify &amp; WooCommerce CSV | Pennyleak</title>
+<meta name="description" content="Turn supplier PDF price lists into a clean Shopify or WooCommerce CSV. Decimal slips, duplicate SKUs and price jumps held for review. Free sample.">
+<link rel="canonical" href="https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#05070d"><meta name="color-scheme" content="dark">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Pennyleak">
+<meta property="og:title" content="Supplier PDF price list to an import-ready Shopify or WooCommerce file, every price checked"><meta property="og:description" content="Turn supplier PDF price lists into a clean Shopify or WooCommerce CSV. Decimal slips, duplicate SKUs and price jumps held for review. Free sample.">
+<meta property="og:url" content="https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/"><meta property="og:image" content="https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Supplier PDF price list to an import-ready Shopify or WooCommerce file, every price checked">
+<meta name="twitter:description" content="Turn supplier PDF price lists into a clean Shopify or WooCommerce CSV. Decimal slips, duplicate SKUs and price jumps held for review. Free sample.">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Supplier PDF price list converted to a checked Shopify CSV"><meta name="twitter:image" content="https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/og.png"><meta name="author" content="Danish Rajpoot">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>:root{--a1:#2dd4bf;--a2:#34d399;--a3:#a3e635;--pc:45,212,191;--pc2:52,211,153;--pc3:163,230,53;--btnink:#03201b}
+:root{--bg:#05070d;--ink:#eef2ff;--mute:#a9b2c7;--dim:#8a93a9;--line:rgba(255,255,255,.09);--glass:rgba(255,255,255,.045);--r:20px;--warn:#fbbf24;--ok:#34d399;--disp:"Space Grotesk",Inter,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--a1)}img,svg{max-width:100%}
+:focus-visible{outline:2px solid var(--a1);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;z-index:100;background:#fff;color:#000;padding:8px 14px;border-radius:8px}.skip:focus{left:8px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.aurora{position:fixed;inset:0;z-index:-3;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;width:70vmax;height:70vmax;border-radius:50%;opacity:.5;animation:drift 28s ease-in-out infinite alternate;will-change:transform}
+.aurora i:nth-child(1){background:radial-gradient(circle,rgba(var(--pc),.38),transparent 62%);top:-38vmax;left:-22vmax}
+.aurora i:nth-child(2){background:radial-gradient(circle,rgba(var(--pc2),.30),transparent 62%);top:-10vmax;right:-34vmax;animation-duration:34s;animation-direction:alternate-reverse}
+.aurora i:nth-child(3){background:radial-gradient(circle,rgba(var(--pc3),.18),transparent 62%);bottom:-46vmax;left:10vmax;animation-duration:40s}
+@keyframes drift{to{transform:translate3d(9vmax,7vmax,0) scale(1.12)}}
+.grain{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));transform-origin:0 50%;transform:scaleX(0)}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(6,8,15,.66);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font:700 17px/1 var(--disp);color:var(--ink);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+.logo .mk{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--a1),var(--a2));color:var(--btnink);box-shadow:0 6px 20px -6px rgba(var(--pc),.8)}
+.logo em{font-style:normal;color:var(--a1)}.logo small{font:500 13px Inter;color:var(--dim);margin-left:2px}
+.links{display:flex;gap:4px;margin-left:auto}
+.links a{color:var(--mute);text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 12px;border-radius:999px;transition:color .2s,background .2s}
+.links a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.nav .btn{--h:40px;font-size:14px;padding:0 16px}
+.menu{display:none;margin-left:auto;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);width:42px;height:42px;border-radius:12px;cursor:pointer}
+/* buttons */
+.btn{--h:52px;position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:var(--h);padding:0 24px;border-radius:999px;font-weight:650;font-size:16px;text-decoration:none;color:var(--btnink);background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 12px 34px -12px rgba(var(--pc),.85),inset 0 1px 0 rgba(255,255,255,.45);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;white-space:nowrap}
+.btn::before{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px rgba(var(--pc),.95),inset 0 1px 0 rgba(255,255,255,.45)}.btn:hover::before{left:135%}
+.btn svg{transition:transform .25s}.btn:hover svg{transform:translateX(3px)}
+.btn.ghost{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid rgba(255,255,255,.16);box-shadow:none;backdrop-filter:blur(8px)}
+.btn.ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(var(--pc),.6)}
+.btn.block{width:100%}
+/* hero */
+.hero{position:relative;padding:132px 0 30px;text-align:center;isolation:isolate;overflow-x:clip}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:-1;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 25%,transparent 75%)}
+.gridbg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000,transparent);mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000,transparent)}
+.crumbs{font-size:13px;color:var(--dim);margin-bottom:18px}.crumbs a{color:var(--mute);text-decoration:none}.crumbs a:hover{color:var(--ink)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 16px 6px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:13.5px;color:var(--mute);backdrop-filter:blur(8px)}
+.eyebrow b{color:var(--ink);font-weight:600;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--a1);box-shadow:0 0 0 0 rgba(var(--pc),.7);animation:ping 2s infinite;flex:none}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(var(--pc),0)}100%{box-shadow:0 0 0 0 rgba(var(--pc),0)}}
+h1{font-family:var(--disp);font-size:clamp(34px,5vw,64px);line-height:1.05;letter-spacing:-.035em;margin:24px auto 22px;max-width:1060px;font-weight:700;text-wrap:balance}
+.grad{background:linear-gradient(100deg,var(--a1),var(--a2) 45%,var(--a3) 70%,var(--a1));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:220% center}}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--mute);max-width:760px;margin:0 auto;text-wrap:pretty}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.note{font-size:14px;color:var(--dim);margin:16px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:26px}
+.chips span{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--mute)}
+.chips svg{color:var(--a1);width:14px;height:14px}
+.intro>*{animation:up .9s both cubic-bezier(.2,.7,.2,1)}
+.intro>*:nth-child(2){animation-delay:.08s}.intro>*:nth-child(3){animation-delay:.16s}.intro>*:nth-child(4){animation-delay:.24s}.intro>*:nth-child(5){animation-delay:.32s}.intro>*:nth-child(6){animation-delay:.4s}.intro>*:nth-child(7){animation-delay:.48s}
+@keyframes up{from{opacity:0;transform:translateY(22px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* stage */
+.stage{position:relative;max-width:1120px;margin:64px auto 0;border-radius:24px;padding:1px;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.03) 60%);box-shadow:0 50px 140px -40px rgba(var(--pc),.55),0 30px 60px -30px rgba(0,0,0,.8);transform:perspective(1800px) rotateX(var(--tilt,0deg)) scale(var(--sc,1));transform-origin:50% 0;animation:fadein 1.2s .45s both;text-align:left}
+.stage::after{content:"";position:absolute;left:10%;right:10%;bottom:-60px;height:120px;background:radial-gradient(ellipse at center,rgba(var(--pc),.35),transparent 70%);filter:blur(20px);z-index:-1}
+@keyframes fadein{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:none}}
+.stage-in>*,.stage-in>*>*{min-width:0}
+.stage-in{border-radius:23px;background:rgba(9,12,22,.94);overflow:hidden}
+.wbar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);font:500 12.5px/1.3 var(--mono);color:var(--dim)}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+.wbar .live{margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:var(--a1);white-space:nowrap}
+.sfoot{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;align-items:center;padding:14px 18px;border-top:1px solid var(--line);font:500 13px var(--mono);color:var(--mute)}
+.sfoot b{color:var(--ink)}
+.cap{text-align:center;font-size:13px;color:var(--dim);margin-top:18px}
+/* sections */
+.glow::before{content:"";position:absolute;inset:10% 0 auto;height:70%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(var(--pc),.10),transparent 70%)}
+.glow2::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 40% 50% at 85% 30%,rgba(var(--pc2),.09),transparent 70%),radial-gradient(ellipse 40% 50% at 10% 80%,rgba(var(--pc3),.07),transparent 70%)}
+section{position:relative;padding:110px 0}
+.sh{max-width:780px;margin:0 auto 54px;text-align:center}
+.kicker{display:inline-block;font:600 12.5px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--a1)}
+h2{font-family:var(--disp);font-size:clamp(29px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;margin:16px 0 16px;font-weight:700;text-wrap:balance}
+.sh p{color:var(--mute);font-size:18px;margin:0;text-wrap:pretty}
+h3{font-family:var(--disp);font-size:20px;letter-spacing:-.01em;margin:0 0 8px;font-weight:600}
+.divider{height:1px;max-width:1180px;margin:0 auto;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent)}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s,background .3s;transition-delay:calc(var(--d,0)*90ms)}
+.js .rv.in{opacity:1;transform:none}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1120px;margin:70px auto 0}
+.stat{padding:22px 22px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));text-align:left}
+.stat b{display:block;font:700 clamp(30px,3.4vw,44px)/1 var(--disp);letter-spacing:-.03em;background:linear-gradient(120deg,var(--ink),var(--a1));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stat>span{display:block;margin-top:10px;color:var(--mute);font-size:14px;line-height:1.45}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{position:relative;overflow:hidden;padding:28px;border-radius:var(--r);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,-30%),rgba(var(--pc),.16),transparent 50%);opacity:0;transition:opacity .35s}
+.card:hover{transform:translateY(-5px);border-color:rgba(var(--pc),.4);box-shadow:0 24px 60px -24px rgba(var(--pc),.45)}
+.js .card.rv.in:hover{transform:translateY(-5px)}
+.card:hover::after{opacity:1}
+.card p{margin:0;color:var(--mute);font-size:15.5px}
+.ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;color:var(--a1);background:rgba(var(--pc),.1);border:1px solid rgba(var(--pc),.25)}
+.step .n{font:700 54px/1 var(--disp);letter-spacing:-.04em;background:linear-gradient(180deg,rgba(var(--pc),.9),rgba(var(--pc),.05));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+.checks{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.checks li{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#d6dbe8;transition:border-color .3s,background .3s}
+.checks li:hover{border-color:rgba(var(--pc),.35);background:rgba(var(--pc),.05)}
+.checks li svg{flex:none;margin-top:3px;color:var(--a1)}
+/* table */
+.tbl{border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03);overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{text-align:left;padding:15px 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+th{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.03)}
+td{color:#d6dbe8}td code{font-family:var(--mono);color:var(--ink);white-space:nowrap}
+tr.bad td:first-child{box-shadow:inset 3px 0 0 var(--warn)}
+tbody tr{transition:background .25s}tbody tr:hover{background:rgba(251,191,36,.06)}
+.tag{display:inline-block;font:600 11.5px var(--mono);padding:3px 9px;border-radius:999px;background:rgba(251,191,36,.14);color:#fcd34d;margin-right:8px;white-space:nowrap}
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.panel{padding:30px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015))}
+.panel p{color:var(--mute);margin:0 0 10px}.panel p b{color:var(--ink)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pills span{font:500 13px var(--mono);padding:6px 11px;border-radius:10px;background:rgba(var(--pc),.08);border:1px solid rgba(var(--pc),.2);color:var(--ink)}
+/* pricing */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:stretch}
+.plan{display:flex;flex-direction:column;padding:30px 26px}
+.plan .price{font:700 46px/1 var(--disp);letter-spacing:-.04em;margin:14px 0 14px;font-variant-numeric:tabular-nums}
+.plan .price small{font:500 15px Inter;color:var(--dim);letter-spacing:0;margin-left:4px}
+.plan p{flex:1;margin-bottom:24px}
+.plan.featured{background:linear-gradient(180deg,rgba(var(--pc),.14),rgba(255,255,255,.02));border-color:transparent;box-shadow:0 30px 80px -30px rgba(var(--pc),.6)}
+.plan.featured::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--ang),var(--a1),var(--a2),var(--a3),var(--a1));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 6s linear infinite;pointer-events:none}
+@keyframes spin{to{--ang:360deg}}
+.badge{position:absolute;top:18px;right:18px;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;color:var(--btnink);background:linear-gradient(135deg,var(--a1),var(--a2))}
+.fine{text-align:center;color:var(--dim);font-size:14px;margin-top:22px}
+/* faq */
+.faq{max-width:860px;margin:0 auto}
+.faq details{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03);margin-bottom:12px;transition:border-color .3s,background .3s}
+.faq details[open]{border-color:rgba(var(--pc),.4);background:rgba(var(--pc),.05)}
+.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font:600 17px/1.4 var(--disp);cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq .pm{flex:none;color:var(--a1);transition:transform .35s}.faq details[open] .pm{transform:rotate(135deg)}
+.faq details p{margin:0;padding:0 24px 22px;color:var(--mute)}
+.faq details[open] p{animation:up .45s both}
+/* about */
+.about{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;max-width:920px;margin:0 auto}
+.avatar{width:92px;height:92px;border-radius:26px;display:grid;place-items:center;font:700 32px var(--disp);color:var(--btnink);background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 20px 50px -18px rgba(var(--pc),.8)}
+.about p{color:var(--mute);margin:0 0 12px;font-size:17px}.about p b{color:var(--ink)}
+.about .lnk{display:flex;gap:16px;flex-wrap:wrap}.about .lnk a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-bottom:1px solid rgba(var(--pc),.5)}
+/* final */
+.final{position:relative;overflow:hidden;text-align:center;padding:76px 28px;border-radius:30px;border:1px solid rgba(255,255,255,.12);background:radial-gradient(ellipse 70% 90% at 50% 0%,rgba(var(--pc),.28),transparent 70%),radial-gradient(ellipse 60% 80% at 100% 100%,rgba(var(--pc2),.22),transparent 70%),rgba(255,255,255,.03)}
+.final p{color:var(--mute);font-size:18px;max-width:640px;margin:0 auto}
+footer{padding:44px 0 60px;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
+footer a{color:var(--mute);text-decoration:none}footer a:hover{color:var(--ink)}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+/* mobile bar */
+.mbar{display:none}
+@media (max-width:860px){
+ .links,.nav .wrap>.btn{display:none}.menu{display:grid;place-items:center}
+ .nav.open .links{display:flex;flex-direction:column;position:absolute;top:70px;left:12px;right:12px;padding:10px;border-radius:18px;background:rgba(8,11,20,.96);border:1px solid var(--line);backdrop-filter:blur(16px)}
+ .nav.open .links a{padding:12px 14px;font-size:16px}
+ .nav{background:rgba(6,8,15,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .split{grid-template-columns:1fr}
+ section{padding:76px 0}
+ .hero{padding-top:104px}
+ .wbar .ttl{display:none}
+ .eyebrow{font-size:12.5px;line-height:1.35;text-align:left;max-width:100%}
+ .mbar{display:flex;position:fixed;left:10px;right:10px;bottom:10px;z-index:55;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:18px;background:rgba(8,11,20,.88);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 20px 50px -10px rgba(0,0,0,.8);transform:translateY(130%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+ .mbar.show{transform:none}
+ .mbar span{font-size:13px;color:var(--mute);line-height:1.3;flex:1}.mbar span b{display:block;color:var(--ink);font-size:14px}
+ .mbar .btn{--h:44px;padding:0 16px;font-size:14.5px}
+ body{padding-bottom:84px}
+ .about{grid-template-columns:1fr;text-align:left}
+}
+@media (max-width:600px){
+ .tbl table{min-width:0}.tbl thead{display:none}.tbl tr{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.06)}.tbl td{padding:0;border:0}.tbl td:last-child{grid-column:1/-1;margin-top:6px}tr.bad td:first-child{box-shadow:none}tr.bad{box-shadow:inset 3px 0 0 var(--warn)}
+ .sfoot{font-size:12px;gap:6px 12px}
+}
+@media (max-width:520px){
+ .wrap{padding:0 18px}.cta .btn{width:100%}.checks{grid-template-columns:1fr}.stat{padding:18px}.card{padding:22px}
+ .logo small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .js .rv{opacity:1;transform:none}
+ .stage{transform:none}
+}
+
+.pdfgrid{display:grid;grid-template-columns:1fr 128px 1.2fr;padding:30px 30px 26px;align-items:center}
+.paperwrap{perspective:900px}
+.paper{position:relative;overflow:hidden;background:#f7f5ef;color:#1f2937;border-radius:10px;padding:18px 18px 10px;box-shadow:0 30px 60px -25px #000,0 0 0 1px rgba(0,0,0,.2);transform:rotateY(8deg) rotate(-1.2deg)}
+.paper .ph{display:flex;justify-content:space-between;align-items:end;font:700 11px/1.2 Inter;letter-spacing:.1em;color:#111827;border-bottom:2px solid #111827;padding-bottom:7px;margin-bottom:4px}
+.paper .ph small{font:500 10px var(--mono);letter-spacing:0;color:#6b7280}
+.pr{display:grid;grid-template-columns:64px 1fr 66px;gap:10px;align-items:center;font:500 11.5px var(--mono);padding:6px 3px;border-bottom:1px dashed #d8d4c8;border-radius:3px}
+.pr i{height:6px;border-radius:3px;background:#dcd8cc;width:var(--w,80%)}
+.pr b{text-align:right;font-weight:600}
+.pr.h{animation:hl 3.6s infinite;animation-delay:calc(var(--t)*1s)}
+@keyframes hl{0%,100%{background:transparent}8%,40%{background:rgba(251,191,36,.35)}}
+.beam{position:absolute;left:0;right:0;top:0;height:70px;background:linear-gradient(180deg,transparent,rgba(45,212,191,.28));border-bottom:2px solid #14b8a6;box-shadow:0 6px 18px rgba(20,184,166,.5);animation:scan 3.6s cubic-bezier(.55,0,.45,1) infinite;pointer-events:none}
+@keyframes scan{0%{transform:translateY(-75px)}100%{transform:translateY(330px)}}
+.mid{display:flex;flex-direction:column;align-items:center;gap:12px;position:relative}
+.orb{position:relative;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;color:var(--btnink);background:radial-gradient(circle at 30% 30%,#99f6e4,var(--a1) 55%,#0f766e);box-shadow:0 0 50px rgba(45,212,191,.6)}
+.orb::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px dashed rgba(45,212,191,.6);animation:rot 9s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.mid .lbl{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.flow{position:absolute;top:38px;left:-10px;right:-10px;height:2px;z-index:-1;background:linear-gradient(90deg,transparent,rgba(45,212,191,.4),transparent)}
+.flow i{position:absolute;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--a1);box-shadow:0 0 12px var(--a1);animation:fl 1.8s linear infinite;animation-delay:calc(var(--i)*.6s);opacity:0}
+@keyframes fl{0%{left:0;opacity:0}15%,85%{opacity:1}100%{left:calc(100% - 8px);opacity:0}}
+.csv{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);overflow:hidden}
+.csv .top{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);font:500 12.5px var(--mono);color:var(--mute)}
+.csv .top b{color:var(--ink);font-weight:600;margin-right:auto}
+.st{font:600 10.5px var(--mono);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.st.ok{background:rgba(52,211,153,.14);color:#6ee7b7}.st.w{background:rgba(251,191,36,.15);color:#fcd34d}
+.csv .hd,.csv .r{display:grid;grid-template-columns:82px 72px 1fr;gap:10px;align-items:center;padding:8px 14px;font:500 12.5px var(--mono);border-bottom:1px solid rgba(255,255,255,.05)}
+.csv .hd{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.025)}
+.csv .r{animation:rowin 9s infinite both;animation-delay:calc(var(--i)*.42s)}
+.csv .r.held{background:linear-gradient(90deg,rgba(251,191,36,.12),transparent 70%)}
+.csv .r .why{font-size:11.5px;color:#fcd34d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@keyframes rowin{0%{opacity:0;transform:translateX(-14px)}5%,86%{opacity:1;transform:none}95%,100%{opacity:0;transform:none}}
+.eq{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 22px;margin-top:40px}
+.eq .t{padding:20px 26px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.035);text-align:center;min-width:170px}
+.eq .t b{display:block;font:700 44px/1 var(--disp);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.eq .t span{font-size:13.5px;color:var(--mute)}
+.eq .t.ok b{color:#6ee7b7}.eq .t.w b{color:#fcd34d}
+.eq .op{font:600 30px var(--disp);color:var(--dim)}
+@media (max-width:860px){
+ .pdfgrid{grid-template-columns:1fr;gap:18px;padding:20px}
+ .paper{transform:none}.mid{flex-direction:row;justify-content:center}.orb{width:56px;height:56px}.orb svg{width:22px}
+ .flow{display:none}.pr{grid-template-columns:58px 1fr 60px}
+ .wbar .ttl{display:none}
+}
+.eq{}
+@media (max-width:600px){.eq{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px}.eq .t{min-width:0;padding:14px 8px}.eq .t b{font-size:32px}.eq .t span{font-size:12px;line-height:1.3;display:block;margin-top:6px}.eq .op{font-size:20px}}
+@media (max-width:520px){.csv .hd,.csv .r{grid-template-columns:70px 62px 1fr;padding:8px 10px;font-size:11.5px}.eq .t{min-width:0;flex:1}.eq .op{font-size:22px}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "Supplier PDF Price List to Shopify / WooCommerce CSV Conversion", "description": "Turn supplier PDF price lists into a clean Shopify or WooCommerce CSV. Decimal slips, duplicate SKUs and price jumps held for review. Free sample.", "url": "https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/", "image": "https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/og.png", "brand": {"@type": "Brand", "name": "Pennyleak"}, "offers": [{"@type": "Offer", "name": "Single list", "price": "40", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/"}, {"@type": "Offer", "name": "Store-ready", "price": "95", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/"}, {"@type": "Offer", "name": "Batch + repeat", "price": "220", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/"}, {"@type": "Offer", "name": "Monthly", "price": "79", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can you convert scanned PDF price lists?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, with an OCR step first. Scans produce more reading errors, so those rows get a manual check and anything uncertain is marked in the review sheet."}}, {"@type": "Question", "name": "Do you upload the products to my Shopify store?", "acceptedAnswer": {"@type": "Answer", "text": "The file is ready to import, and Shopify rows come set as drafts so nothing goes live until you publish. I can run the import for you if you give me staff access."}}, {"@type": "Question", "name": "What happens to rows that fail a check?", "acceptedAnswer": {"@type": "Answer", "text": "They go to a review sheet with the reason next to each one. Nothing is silently fixed or dropped."}}, {"@type": "Question", "name": "Can you handle variants like size and colour?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, in the Batch + repeat tier. Variant rows are grouped under one product handle."}}, {"@type": "Question", "name": "What do you do with my supplier files?", "acceptedAnswer": {"@type": "Answer", "text": "They are used for your job only and deleted after delivery unless you want repeat runs. I am happy to sign an NDA."}}, {"@type": "Question", "name": "Is this GDPR friendly?", "acceptedAnswer": {"@type": "Answer", "text": "Price lists rarely contain personal data. If yours do, I process them only for your job and delete them afterwards."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Danish Rajpoot", "jobTitle": "Principal Data Engineer", "url": "https://muhammaddanish122.github.io/", "sameAs": ["https://github.com/MuhammadDanish122", "https://www.linkedin.com/in/danish-r-37bb85141/"]}</script>
+</head><body>
+<script>document.documentElement.classList.add("js")</script>
+<a class="skip" href="#main">Skip to content</a><div class="progress" aria-hidden="true"></div><div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div><div class="grain" aria-hidden="true"></div><header class="nav"><div class="wrap"><a class="logo" href="https://muhammaddanish122.github.io/pennyleak/" aria-label="Pennyleak home"><span class="mk" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/></svg></span><span>Penny<em>leak</em></span><small>· Price List Import</small></a><nav class="links" id="navlinks" aria-label="Page sections"><a href="#how">How it works</a><a href="#checks">What gets caught</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Free%20sample%20-%20supplier%20PDF">Send a PDF <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><button class="menu" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
+<main id="main">
+<div class="hero"><canvas id="fx" aria-hidden="true"></canvas><div class="gridbg" aria-hidden="true"></div><div class="wrap">
+<div class="intro">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="https://muhammaddanish122.github.io/">Danish Rajpoot</a> / PDF price list to Shopify CSV</nav>
+<div><span class="eyebrow"><span class="dot"></span><b>Free sample</b> first 2 pages of your first PDF</span></div>
+<h1>Convert supplier PDF price lists into a <span class="grad">Shopify or WooCommerce CSV</span>, with every price checked</h1>
+<p class="lead">Copying a price list by hand is where margin quietly goes missing: a comma in the wrong place, a SKU listed twice, a price that tripled and nobody noticed. I convert the PDF and hold back every row that looks wrong, with the reason, before it reaches your store.</p>
+<div class="cta"><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Free%20sample%20-%20supplier%20PDF">Free sample: send one PDF <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost" href="#pricing">See pricing</a></div>
+<p class="note">First 2 pages of your first PDF converted free. No card, no call needed.</p>
+<div class="chips"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Shopify</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>WooCommerce</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>BigCommerce</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>EU &amp; US number formats</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>NDA on request</span></div>
+</div>
+<div class="stage" role="img" aria-label="Animated demo: a supplier PDF price list is scanned, converted to Shopify CSV rows, and rows with a decimal slip, a price jump, a duplicate SKU, a negative price or a missing price are held for review">
+<div class="stage-in"><div class="wbar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">pdf2catalog · test price list, fictional supplier</span><span class="live"><span class="dot"></span>converting</span></div>
+<div class="pdfgrid" aria-hidden="true">
+<div class="paperwrap"><div class="paper"><div class="beam"></div><div class="ph"><span>SUPPLIER PRICE LIST</span><small>page 1 / 2 · EUR</small></div><div class="pr" style="--w:78%;--t:0.15"><span>HX-1001</span><i></i><b>12,90</b></div><div class="pr h" style="--w:64%;--t:0.46"><span>HX-1003</span><i></i><b>18,90</b></div><div class="pr" style="--w:85%;--t:0.77"><span>SC-2001</span><i></i><b>9,80</b></div><div class="pr h" style="--w:70%;--t:1.08"><span>SC-2002</span><i></i><b>11,40</b></div><div class="pr h" style="--w:70%;--t:1.39"><span>SC-2002</span><i></i><b>11,90</b></div><div class="pr" style="--w:58%;--t:1.7"><span>TL-4001</span><i></i><b>24,90</b></div><div class="pr h" style="--w:74%;--t:2.01"><span>TL-4004</span><i></i><b>1.249,00</b></div><div class="pr h" style="--w:66%;--t:2.32"><span>TL-4005</span><i></i><b></b></div><div class="pr" style="--w:82%;--t:2.63"><span>PT-5001</span><i></i><b>6,20</b></div><div class="pr h" style="--w:60%;--t:2.94"><span>PT-5004</span><i></i><b>-6,50</b></div></div></div>
+<div class="mid"><div class="flow"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i></div><div class="orb"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11M11 3l4 4-4 4M20 17H9M13 13l-4 4 4 4"/></svg></div><span class="lbl">extract · check</span></div>
+<div class="csv"><div class="top"><b>shopify-import.csv</b><span class="st ok">50 passed</span><span class="st w">6 held</span></div><div class="hd"><span>SKU</span><span>Price</span><span>Check</span></div><div class="r" style="--i:0"><span>HX-1001</span><span>12.90</span><span><span class="st ok">✓ passed</span></span></div><div class="r held" style="--i:1"><span>HX-1003</span><span>18,90</span><span class="why">⚠ +47% vs your store price</span></div><div class="r" style="--i:2"><span>SC-2001</span><span>9.80</span><span><span class="st ok">✓ passed</span></span></div><div class="r held" style="--i:3"><span>SC-2002</span><span>11,40 / 11,90</span><span class="why">⚠ duplicate SKU, two prices</span></div><div class="r" style="--i:4"><span>TL-4001</span><span>24.90</span><span><span class="st ok">✓ passed</span></span></div><div class="r held" style="--i:5"><span>TL-4004</span><span>1.249,00</span><span class="why">⚠ 45x category median</span></div><div class="r held" style="--i:6"><span>TL-4005</span><span>(blank)</span><span class="why">⚠ no price on the list</span></div><div class="r" style="--i:7"><span>PT-5001</span><span>6.20</span><span><span class="st ok">✓ passed</span></span></div><div class="r held" style="--i:8"><span>PT-5004</span><span>-6,50</span><span class="why">⚠ negative price</span></div></div>
+</div>
+<div class="sfoot" aria-hidden="true"><span><b>56</b> rows on the PDF</span><span>=</span><span><b>50</b> in the import file</span><span>+</span><span><b>6</b> held for review</span></div>
+</div></div>
+<p class="cap">Illustration based on a real run on a test price list (fictional supplier).</p>
+<div class="stats">
+<div class="stat rv" style="--d:0"><b><span data-to="56">56</span></b><span>rows in the test price list run (2 pages)</span></div>
+<div class="stat rv" style="--d:1"><b><span data-to="50">50</span></b><span>rows passed every check</span></div>
+<div class="stat rv" style="--d:2"><b><span data-to="6">6</span></b><span>rows held, each with the reason</span></div>
+<div class="stat rv" style="--d:3"><b><span data-to="0">0</span></b><span>rows silently fixed or dropped</span></div>
+</div>
+</div></div>
+
+<section id="how" aria-labelledby="how-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">Process</span><h2 id="how-h">How the PDF to CSV conversion works</h2><p>Three steps. You send a file, you get back two.</p></div>
+<div class="grid">
+<div class="card step rv" style="--d:0"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div class="n">01</div><h3>Send the supplier PDF</h3><p>Email the price list and tell me your platform: Shopify, WooCommerce, BigCommerce, or send an export of your current products.</p></div>
+<div class="card step rv" style="--d:1"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/></svg></div><div class="n">02</div><h3>I extract and validate</h3><p>SKU, description, price, unit and category, mapped to your import template. Then every row is checked.</p></div>
+<div class="card step rv" style="--d:2"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h8l4 4v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M3 7v12a2 2 0 0 0 2 2h10M12 13l2 2 4-4"/></svg></div><div class="n">03</div><h3>You get two files</h3><p>An import file with only the rows that passed, and a short review sheet with the rest and why each was held.</p></div>
+</div></div></section>
+<div class="divider"></div>
+
+<section id="checks" class="glow2" aria-labelledby="checks-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">Validation</span><h2 id="checks-h">Price validation: what gets caught before import</h2><p>A real run on a test price list (fictional supplier, 56 rows, 2 pages). 50 rows passed, 6 were held:</p></div>
+<div class="tbl rv"><table><thead><tr><th scope="col">SKU</th><th scope="col">On the PDF</th><th scope="col">Why it was held</th></tr></thead><tbody>
+<tr class="bad"><td><code>TL-4004</code></td><td><code>1.249,00</code></td><td><span class="tag">decimal slip</span>45x the median price of its category. Likely decimal slip.</td></tr>
+<tr class="bad"><td><code>HX-1003</code></td><td><code>18,90</code></td><td><span class="tag">price jump</span>Up 47% compared with your current store price (12.90).</td></tr>
+<tr class="bad"><td><code>SC-2002</code></td><td><code>11,40</code> and <code>11,90</code></td><td><span class="tag">duplicate</span>Same SKU listed twice with two prices.</td></tr>
+<tr class="bad"><td><code>PT-5004</code></td><td><code>-6,50</code></td><td><span class="tag">negative</span>Negative price.</td></tr>
+<tr class="bad"><td><code>TL-4005</code></td><td><code>(blank)</code></td><td><span class="tag">missing</span>No price on the list.</td></tr>
+</tbody></table></div>
+<div class="eq rv" aria-label="Row count check: 56 rows on the PDF equals 50 rows in the import file plus 6 rows held">
+<div class="t"><b data-to="56">56</b><span>rows on the PDF</span></div><span class="op" aria-hidden="true">=</span>
+<div class="t ok"><b data-to="50">50</b><span>rows in the import file</span></div><span class="op" aria-hidden="true">+</span>
+<div class="t w"><b data-to="6">6</b><span>rows held</span></div></div>
+<p class="cap">Every job ends with a row count check: rows on the PDF = rows in the import file + rows held. Nothing disappears.</p>
+</div></section>
+<div class="divider"></div>
+
+<section aria-labelledby="who-for"><div class="wrap"><div class="split">
+<div class="panel rv"><span class="kicker">Fit</span><h2 id="who-for" style="font-size:clamp(26px,3vw,38px)">Who this is for</h2>
+<ul class="checks" style="grid-template-columns:1fr">
+<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Shopify and WooCommerce stores that buy from wholesalers who only send PDF catalogs</span></li>
+<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Hardware, furniture, beauty, auto parts and home goods retailers with hundreds of SKUs per supplier</span></li>
+<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>B2B distributors and dropshippers updating prices every month or quarter</span></li>
+<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Agencies and VAs who manage product uploads for several stores</span></li></ul></div>
+<div class="panel rv" style="--d:1"><span class="kicker">Formats</span><h2 style="font-size:clamp(26px,3vw,38px)">Supported formats</h2>
+<p><b>In:</b> text-based PDF price lists and catalogs (scanned PDFs with an OCR step), EU and US number formats, multi-page tables with repeated headers.</p>
+<div class="pills"><span>PDF (text)</span><span>PDF (scanned + OCR)</span><span>1.249,00</span><span>1,249.00</span><span>multi-page tables</span></div>
+<p style="margin-top:22px"><b>Out:</b> Shopify product CSV, WooCommerce product CSV, Matrixify-style sheets, plain Excel/CSV, or your ERP template.</p>
+<div class="pills"><span>Shopify CSV</span><span>WooCommerce CSV</span><span>Matrixify</span><span>Excel / CSV</span><span>ERP template</span></div></div>
+</div></div></section>
+
+<section id="pricing" class="glow" aria-labelledby="pricing-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">Pricing</span><h2 id="pricing-h">PDF to Shopify CSV pricing</h2><p>Fixed prices. Start with the free sample, pay only when you like the result.</p></div>
+<div class="plans"><div class="card plan rv" style="--d:0"><h3>Single list</h3><div class="price">$<span data-to="40">40</span><small></small></div><p>1 PDF, up to 10 pages. Clean CSV or Excel plus review sheet. 2 days.</p><a class="btn ghost block" href="mailto:daneshrana45@gmail.com?subject=PDF%20to%20CSV%20-%20Single%20list" aria-label="Start with Single list">Get started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div><div class="card plan rv featured" style="--d:1"><span class="badge">Recommended</span><h3>Store-ready</h3><div class="price">$<span data-to="95">95</span><small></small></div><p>Up to 40 pages, mapped to your Shopify or WooCommerce import, checked against your current prices. 3 days.</p><a class="btn block" href="mailto:daneshrana45@gmail.com?subject=PDF%20to%20CSV%20-%20Store-ready" aria-label="Start with Store-ready">Get started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div><div class="card plan rv" style="--d:2"><h3>Batch + repeat</h3><div class="price">$<span data-to="220">220</span><small></small></div><p>Up to 5 PDFs, variants and tags, plus a reusable parser so next month's list is a quick re-run. 5 days.</p><a class="btn ghost block" href="mailto:daneshrana45@gmail.com?subject=PDF%20to%20CSV%20-%20Batch%20%2B%20repeat" aria-label="Start with Batch + repeat">Get started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div><div class="card plan rv" style="--d:3"><h3>Monthly</h3><div class="price">$<span data-to="79">79</span><small>/mo</small></div><p>Every new list from up to 3 suppliers, converted and checked within 1 business day.</p><a class="btn ghost block" href="mailto:daneshrana45@gmail.com?subject=PDF%20to%20CSV%20-%20Monthly" aria-label="Start with Monthly">Get started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>
+<p class="fine">Prices in USD. EUR and GBP invoices on request.</p>
+</div></section>
+
+<section aria-labelledby="who"><div class="wrap"><div class="about rv"><div class="avatar" aria-hidden="true">DR</div><div><span class="kicker">Who does the work</span><h2 id="who" style="font-size:clamp(26px,3vw,36px);margin:12px 0 14px">One engineer, start to finish</h2><p>I'm <b>Danish Rajpoot</b>, a Principal Data Engineer with 8+ years building data platforms and pipelines, and a master's degree from Finland. For this service I built the converter and its checks myself, so I can tell you exactly why any row was held. I do the work myself, and I reply to every email personally, usually within one working day.</p><div class="lnk"><a href="https://www.linkedin.com/in/danish-r-37bb85141/">LinkedIn</a><a href="https://github.com/MuhammadDanish122">GitHub</a><a href="https://muhammaddanish122.github.io/">Portfolio</a></div></div></div></div></section>
+
+<section id="faq" aria-labelledby="faq-h"><div class="wrap">
+<div class="sh rv"><span class="kicker">FAQ</span><h2 id="faq-h">PDF to CSV conversion: questions</h2></div>
+<div class="faq"><details class="rv" style="--d:0"><summary>Can you convert scanned PDF price lists?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>Yes, with an OCR step first. Scans produce more reading errors, so those rows get a manual check and anything uncertain is marked in the review sheet.</p></details><details class="rv" style="--d:1"><summary>Do you upload the products to my Shopify store?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>The file is ready to import, and Shopify rows come set as drafts so nothing goes live until you publish. I can run the import for you if you give me staff access.</p></details><details class="rv" style="--d:2"><summary>What happens to rows that fail a check?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>They go to a review sheet with the reason next to each one. Nothing is silently fixed or dropped.</p></details><details class="rv" style="--d:3"><summary>Can you handle variants like size and colour?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>Yes, in the Batch + repeat tier. Variant rows are grouped under one product handle.</p></details><details class="rv" style="--d:4"><summary>What do you do with my supplier files?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>They are used for your job only and deleted after delivery unless you want repeat runs. I am happy to sign an NDA.</p></details><details class="rv" style="--d:5"><summary>Is this GDPR friendly?<svg class="pm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><p>Price lists rarely contain personal data. If yours do, I process them only for your job and delete them afterwards.</p></details></div></div></section>
+
+<section aria-labelledby="final-h" style="padding-top:20px"><div class="wrap"><div class="final rv">
+<span class="kicker">Free sample</span><h2 id="final-h">Send one PDF and see the result</h2>
+<p>Email the price list. You get the first 2 pages back as a clean file plus the review sheet, free, so you can judge the quality before paying anything.</p>
+<div class="cta"><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Free%20sample%20-%20supplier%20PDF">Free sample: send one PDF <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></div></section>
+</main>
+<footer><div class="wrap"><div>Built by Danish Rajpoot, data engineer · <a href="mailto:daneshrana45@gmail.com">daneshrana45@gmail.com</a><br>I reply to every email personally, usually within one working day.</div><nav aria-label="Footer"><a href="https://muhammaddanish122.github.io/">Portfolio</a><a href="https://muhammaddanish122.github.io/pennyleak/">Pennyleak</a><a href="https://github.com/MuhammadDanish122">GitHub</a><a href="https://www.linkedin.com/in/danish-r-37bb85141/">LinkedIn</a></nav></div></footer>
+<div class="mbar" role="region" aria-label="Quick action"><span><b>Free sample</b>First 2 pages, no card</span><a class="btn" href="mailto:daneshrana45@gmail.com?subject=Free%20sample%20-%20supplier%20PDF">Send a PDF</a></div>
+<script>
+(()=>{const d=document,R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const nav=d.querySelector('.nav'),mbar=d.querySelector('.mbar'),hero=d.querySelector('.hero'),pr=d.querySelector('.progress'),st=d.querySelector('.stage');
+const onS=()=>{const y=scrollY;nav.classList.toggle('scrolled',y>12);
+ if(mbar)mbar.classList.toggle('show',y>(hero?hero.offsetHeight*.55:400)&&(innerHeight+y)<d.documentElement.scrollHeight-260);
+ const h=d.documentElement.scrollHeight-innerHeight;if(pr)pr.style.transform='scaleX('+(h>0?y/h:0)+')';
+ if(st&&!R){const r=st.getBoundingClientRect(),k=Math.max(0,Math.min(1,r.top/(innerHeight*.95)));st.style.setProperty('--tilt',(k*(innerWidth<860?8:14)).toFixed(2)+'deg');st.style.setProperty('--sc',(1-k*.05).toFixed(3))}};
+addEventListener('scroll',onS,{passive:true});addEventListener('resize',onS);onS();
+const mb=d.querySelector('.menu');if(mb){mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});d.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded','false')}))}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const t=e.target;t.classList.add('in');io.unobserve(t);setTimeout(()=>{t.style.transitionDelay='0s'},1100+(+getComputedStyle(t).getPropertyValue('--d')||0)*90)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+d.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const fmt=(n,k)=>n.toLocaleString('en-US',{minimumFractionDigits:k,maximumFractionDigits:k});
+const cs=d.querySelectorAll('[data-to]');
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,to=+el.dataset.to,k=+(el.dataset.dec||0),t0=performance.now(),dur=1600;
+ const f=t=>{const p=Math.min(1,(t-t0)/dur);el.textContent=fmt(to*(1-Math.pow(1-p,4)),k);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.6});
+if(!R)cs.forEach(el=>{el.textContent='0';cio.observe(el)});
+d.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+const c=d.getElementById('fx');if(c&&c.getContext){const x=c.getContext('2d'),col=getComputedStyle(d.documentElement).getPropertyValue('--pc').trim()||'255,255,255';let w,h,pts=[],run=true,raf=0,dpr=Math.min(devicePixelRatio||1,2),mx=-999,my=-999;
+ const size=()=>{w=c.clientWidth;h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);const n=Math.min(110,Math.floor(w*h/14000));pts=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.7+.4}))};
+ const draw=()=>{x.clearRect(0,0,w,h);for(let i=0;i<pts.length;i++){const p=pts[i];if(!R){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;const ddx=p.x-mx,ddy=p.y-my,dm=ddx*ddx+ddy*ddy;if(dm<14000){p.x+=ddx*.012;p.y+=ddy*.012}}
+  x.beginPath();x.arc(p.x,p.y,p.r,0,6.2832);x.fillStyle='rgba('+col+',.75)';x.fill();
+  for(let j=i+1;j<pts.length;j++){const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,dd=dx*dx+dy*dy;if(dd<14000){x.strokeStyle='rgba('+col+','+(.18*(1-dd/14000)).toFixed(3)+')';x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}}
+  if(run&&!R)raf=requestAnimationFrame(draw)};
+ size();draw();addEventListener('resize',()=>{size();if(R)draw()});
+ hero.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+ new IntersectionObserver(([e])=>{const was=run;run=e.isIntersecting;if(run&&!was&&!R){cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)}}).observe(c);
+ d.addEventListener('visibilitychange',()=>{run=!d.hidden;if(run&&!R){cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)}})}
+})();
+</script>
+</body></html>

@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://muhammaddanish122.github.io/</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://muhammaddanish122.github.io/white-label-ga4-reports-for-agencies/</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://muhammaddanish122.github.io/kafka-cdc-playbook/</loc><lastmod>2026-11-10</lastmod></url>
-  <url><loc>https://muhammaddanish122.github.io/pennyleak/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://muhammaddanish122.github.io/</loc><lastmod>2026-11-10</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/services/</loc><lastmod>2026-11-10</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/services/real-time-cdc-pipeline/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/services/data-warehouse-migration/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/services/data-pipeline-audit/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/services/excel-to-power-bi-dashboards/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/services/fractional-data-architect/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/tools/</loc><lastmod>2026-11-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/tools/kafka-cdc-sizing-calculator/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/tools/warehouse-cost-estimator/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/tools/reconciliation-sql-generator/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/pennyleak/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/kafka-cdc-playbook/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/pdf-price-list-to-shopify-csv/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/white-label-ga4-reports-for-agencies/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://muhammaddanish122.github.io/case-study.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
